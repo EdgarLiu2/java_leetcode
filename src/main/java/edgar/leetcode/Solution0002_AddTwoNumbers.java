@@ -9,7 +9,7 @@ package edgar.leetcode;
  *
  */
 public class Solution0002_AddTwoNumbers {
-	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode l3 = new ListNode(-1), l3p = l3;
 		int carry = 0;
 
@@ -47,6 +47,38 @@ public class Solution0002_AddTwoNumbers {
 
 		return l3.next;
 	}
+	
+	public static ListNode arrayToListNode(int[] nums) {
+		ListNode head = new ListNode(-1);
+		ListNode pNode = head;
+		
+		for (int i = 0; i < nums.length; i++) {
+			ListNode node = new ListNode(nums[i]);
+			pNode.next = node;
+			pNode = node;
+		}
+		
+		printListNode(head.next);
+		
+		return head.next;
+	}
+	
+	public static void printListNode(ListNode head) {
+		StringBuilder buffer = new StringBuilder();
+		
+		if(head == null) {
+			return;
+		} else {
+			buffer.append(String.valueOf(head.val));
+		}
+		
+		while(head.next != null) {
+			buffer.append(" -> " + head.next.val);
+			head = head.next;
+		}
+		
+		System.out.println(buffer);
+	}
 
 	public static void main(String[] args) {
 		/**
@@ -60,6 +92,20 @@ public class Solution0002_AddTwoNumbers {
 		 * 
 		 * [1,8] [0]
 		 */
+		int[] a1 = {2,4,3};
+		int[] a2 = {5,6,4};
+		ListNode a1_2 = addTwoNumbers(arrayToListNode(a1), arrayToListNode(a2));
+		printListNode(a1_2);
+		
+		int[] b1 = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+		int[] b2 = {5,6,4};
+		ListNode b1_2 = addTwoNumbers(arrayToListNode(b1), arrayToListNode(b2));
+		printListNode(b1_2);
+		
+		int[] c1 = {1,8};
+		int[] c2 = {0};
+		ListNode c1_2 = addTwoNumbers(arrayToListNode(c1), arrayToListNode(c2));
+		printListNode(c1_2);
 	}
 
 }
