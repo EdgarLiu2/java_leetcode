@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edgar.leetcode;
+package edgar.leetcode1_100;
 
 import java.util.HashMap;
 import java.util.Map;

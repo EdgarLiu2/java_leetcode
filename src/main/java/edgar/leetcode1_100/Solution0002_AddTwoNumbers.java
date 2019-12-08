@@ -1,4 +1,4 @@
-package edgar.leetcode;
+package edgar.leetcode1_100;
 
 /**
  * 
