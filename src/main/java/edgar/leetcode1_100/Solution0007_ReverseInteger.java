@@ -1,5 +1,12 @@
 package edgar.leetcode1_100;
 
+/**
+ * 7. 整数反转
+ * https://leetcode-cn.com/problems/reverse-integer/
+ * 
+ * @author Administrator
+ *
+ */
 public class Solution0007_ReverseInteger {
 	
 	public static int reverse1(int x) {
