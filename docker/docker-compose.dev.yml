@@ -1,0 +1,73 @@
+version: '3'
+services:
+# Middleware
+  rabbit:
+    image: rabbitmq:3-management
+    hostname: rabbitmq-server
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: unless-stopped
+  # canal-server:
+    # image: canal/canal-server:v1.1.4
+    # hostname: canal-server
+    # domainname: internal
+    # depends_on:
+      # - mysql-db
+    # environment:
+      # - ENV=DEV
+      # - canal.instance.master.address=mysql-db:3306
+      # - canal.instance.dbUsername=canal
+      # - canal.instance.dbPassword=canal
+      # - canal.instance.connectionCharset=UTF-8
+      # - canal.instance.tsdb.enable=true
+      # - canal.instance.gtidon=false
+      # - canal.instance.filter.regex=.*\\..* 
+    # ports:
+      # - 11111:11111
+    # restart: unless-stopped
+# Storage
+  redis-db:
+    image: redis:latest
+    hostname: redis-db
+    domainname: internal
+    environment:
+      - ENV=DEV
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+    healthcheck:
+      test: redis-cli -h localhost ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  mysql-db:
+    image: mysql:latest
+    hostname: mysql-db
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=test
+      - MYSQL_PASS=test
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    healthcheck:
+      test: /usr/bin/mysql --host=127.0.0.1 --user=test --password=test --silent --execute \"SELECT 1;\"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
+      - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
+      - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
+
+
+volumes:
+  redis_data:
