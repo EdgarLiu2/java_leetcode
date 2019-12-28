@@ -1,3 +1,6 @@
+https://www.rabbitmq.com/tutorials/tutorial-one-java.html
+
+
 1. The management plugin is included in the RabbitMQ distribution. Like any other plugin, it must be enabled before it can be used. That's done using rabbitmq-plugins:
 rabbitmq-plugins enable rabbitmq_management
 http://localhost:15672/
