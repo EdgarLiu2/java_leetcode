@@ -97,6 +97,7 @@ public class HelloTimeAPI {
 		
 		int five = Period.between(finalDate, initialDate).getDays();
 		five = (int) ChronoUnit.DAYS.between(finalDate , initialDate);
+		System.out.println(five);
 	}
 	
 	public static void test_DateFormat() {

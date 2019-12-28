@@ -1,7 +1,7 @@
 version: '3'
 services:
 # Middleware
-  rabbit:
+  rabbitmq:
     image: rabbitmq:3-management
     hostname: rabbitmq-server
     domainname: internal
@@ -13,6 +13,11 @@ services:
       - 5672:5672
       - 15672:15672
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:5672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   # canal-server:
     # image: canal/canal-server:v1.1.4
     # hostname: canal-server

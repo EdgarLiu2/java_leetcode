@@ -1,0 +1,24 @@
+1. The management plugin is included in the RabbitMQ distribution. Like any other plugin, it must be enabled before it can be used. That's done using rabbitmq-plugins:
+rabbitmq-plugins enable rabbitmq_management
+http://localhost:15672/
+
+2. Access and Permissions
+# create a user
+rabbitmqctl add_user admin admin
+# tag the user with "administrator" for full management UI and HTTP API access
+rabbitmqctl set_user_tags admin administrator
+
+3. Commands
+# Listing queues
+rabbitmqctl.bat list_queues
+# Debug Forgotten acknowledgment
+rabbitmqctl.bat list_queues name messages_ready messages_unacknowledged
+# Listing exchanges
+rabbitmqctl list_exchanges
+# Listing bindings
+rabbitmqctl list_bindings
+
+X. Event Driven Architecture，EDA
+order.delivery.onDeliveryEvent（订单.配送.配送完成事件）
+order.normalorder.delivery.onDeliveryEvent
+order.viporder.delivery.onDeliveryEvent（订单.VIP订单.配送.配送完成事件）

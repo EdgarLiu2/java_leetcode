@@ -33,3 +33,7 @@ dependency-reduced-pom.xml
 .classpath
 .project
 .settings/
+
+# Docker Data
+docker/data/mysql/logs/*
+docker/data/mysql/data/*
