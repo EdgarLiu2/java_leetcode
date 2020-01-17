@@ -1,6 +1,44 @@
 version: '3'
 services:
+# Tools
+  ubuntu:
+    image: ubuntu:latest
+    hostname: ubuntu
+    domainname: internal
+    restart: always
+    tty: true
 # Middleware
+  zookeeper-1:
+    image: zookeeper:latest
+    hostname: zookeeper-1
+    domainname: internal
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181
+    ports:
+      - 2181:2181
+      - 8080:8080
+    restart: unless-stopped
+  zookeeper-2:
+    image: zookeeper:latest
+    hostname: zookeeper-2
+    domainname: internal
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181
+    ports:
+      - 2182:2181
+    restart: unless-stopped
+  zookeeper-3:
+    image: zookeeper:latest
+    hostname: zookeeper-3
+    domainname: internal
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181
+    ports:
+      - 2183:2181
+    restart: unless-stopped
   # etcd-1:
     # image: quay.io/coreos/etcd:latest
     # hostname: etcd-1
