@@ -1,0 +1,72 @@
+# Docker mirror: https://r3cphckj.mirror.aliyuncs.com
+version: '3'
+services:
+# Middleware
+  kafka-1:
+    image: wurstmeister/kafka:latest
+    hostname: kafka-1
+    domainname: internal
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
+      KAFKA_ADVERTISED_HOST_NAME: kafka-1
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      JMX_PORT: 9999
+    ports:
+      - 9092:9092
+    restart: unless-stopped
+  kafka-2:
+    image: wurstmeister/kafka:latest
+    hostname: kafka-2
+    domainname: internal
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9092
+      KAFKA_ADVERTISED_HOST_NAME: kafka-2
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      JMX_PORT: 9999
+    ports:
+      - 9093:9092
+    restart: unless-stopped
+  kafka-manager:    # http://localhost:9000/
+    image: solsson/kafka-manager:latest
+    hostname: kafka-manager
+    domainname: internal
+    environment:
+      ZK_HOSTS: zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181
+    ports:
+      - 9000:9000
+    restart: unless-stopped
+  zookeeper-1:
+    image: zookeeper:latest
+    hostname: zookeeper-1
+    domainname: internal
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181
+    ports:
+      - 2181:2181
+      - 8080:8080
+    restart: unless-stopped
+  zookeeper-2:
+    image: zookeeper:latest
+    hostname: zookeeper-2
+    domainname: internal
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181
+    ports:
+      - 2182:2181
+    restart: unless-stopped
+  zookeeper-3:
+    image: zookeeper:latest
+    hostname: zookeeper-3
+    domainname: internal
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181
+    ports:
+      - 2183:2181
+    restart: unless-stopped

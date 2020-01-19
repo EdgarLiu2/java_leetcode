@@ -1,4 +1,4 @@
-package edgar.canal;
+package edgar.try_new.canal;
 
 import java.net.InetSocketAddress;
 import java.util.List;

@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edgar.try_new.canal.ItemRedisCache;
+
 
 public class TestItemRedisCache {
 	private ItemRedisCache itemRedisCache;

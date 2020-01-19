@@ -1,4 +1,4 @@
-package edgar.rabbitmq;
+package edgar.try_new.rabbitmq;
 
 import java.io.IOException;
 
