@@ -15,7 +15,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Channel;
 
 public class RabbitMQUtil {
-	final Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private PropertiesUtil props;
 	private String env;

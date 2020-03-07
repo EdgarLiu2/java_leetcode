@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edgar.leetcode1_100;
 
 /**

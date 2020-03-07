@@ -15,7 +15,9 @@ public class Solution0013_RomanToInteger {
 	public static int romanToInt1(String s) {
 		// 把阿拉伯数字与罗马数字可能出现的所有情况和对应关系，放在Map中
         Map<String, Integer> romans = new HashMap<String, Integer>() {
-        	{
+			private static final long serialVersionUID = 1L;
+
+			{
         		put("M", 1000);
         		put("CM", 900);
         		put("D", 500);
