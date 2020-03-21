@@ -8,6 +8,7 @@ docker-compose -p dev-leetcode -f kafka.cluster.yml up -d
 
 
 REM docker container exec -it dev-leetcode_mysql-db_1 bash
+mysql -uroot -p123456
 REM docker container exec -it dev-leetcode_redis-db_1 bash
 REM docker container exec -it dev-leetcode_canal-server_1 bash
 REM docker container exec -it dev-leetcode_rabbitmq_1 bash
@@ -47,3 +48,15 @@ apt-get -y install vim
 apt-get -y install netcat-traditional	# nc
 apt-get -y install net-tools
 apt-get -y install iputils-ping
+
+2.2.2.0
+
+<!-- 阿里云仓库 -->
+<mirror>
+	<id>alimaven</id>
+	<mirrorOf>central</mirrorOf>
+	<name>aliyun maven</name>
+	<url>https://maven.aliyun.com/repository/central</url>
+</mirror>
+
+# Docker mirror: https://r3cphckj.mirror.aliyuncs.com
