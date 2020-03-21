@@ -1,4 +1,8 @@
-# Docker mirror: https://r3cphckj.mirror.aliyuncs.com
+# Docker mirror:
+#   https://r3cphckj.mirror.aliyuncs.com
+#   https://hub-mirror.c.163.com
+#   https://docker.mirrors.ustc.edu.cn
+
 version: '3'
 services:
 # Tools
