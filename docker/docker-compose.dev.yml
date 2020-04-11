@@ -6,12 +6,12 @@
 version: '3'
 services:
 # Tools
-  ubuntu:
-    image: ubuntu:latest
-    hostname: ubuntu
-    domainname: internal
-    restart: always
-    tty: true
+  # ubuntu:
+    # image: ubuntu:latest
+    # hostname: ubuntu
+    # domainname: internal
+    # restart: always
+    # tty: true
 # Middleware
   # etcd-1:
     # image: quay.io/coreos/etcd:latest
