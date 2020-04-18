@@ -114,11 +114,3 @@ public class Solution0002_AddTwoNumbers {
 
 }
 
-class ListNode {
-	int val;
-	ListNode next;
-
-	ListNode(int x) {
-		val = x;
-	}
-}
