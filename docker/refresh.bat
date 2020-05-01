@@ -9,6 +9,10 @@ docker-compose -p dev-leetcode -f kafka.cluster.yml up -d
 
 REM docker container exec -it dev-leetcode_mysql-db_1 bash
 mysql -uroot -p123456
+	CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';
+	GRANT ALL PRIVILEGES ON test_springboot.* TO 'test'@'localhost';
+	CREATE USER 'test'@'%' IDENTIFIED BY 'test';
+	GRANT ALL PRIVILEGES ON test_springboot.* TO 'test'@'%';
 REM docker container exec -it dev-leetcode_redis-db_1 bash
 REM docker container exec -it dev-leetcode_canal-server_1 bash
 REM docker container exec -it dev-leetcode_rabbitmq_1 bash

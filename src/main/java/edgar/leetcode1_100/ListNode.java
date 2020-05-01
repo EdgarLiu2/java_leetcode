@@ -21,6 +21,10 @@ public class ListNode {
 		return head.next;
 	}
 	
+	public void print() {
+		ListNode.print(this);
+	}
+	
 	public static void print(ListNode head) {
 		StringBuilder buffer = new StringBuilder();
 		
