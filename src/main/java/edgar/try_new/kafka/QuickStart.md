@@ -11,3 +11,9 @@ export JMX_PORT=9998
 
 ## Consumer
 /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka-1:9092 --topic mykafka --from-beginning
+
+## Standalone Testing
+/opt/kafka/bin/kafka-topics.sh --create --zookeeper zookeeper-1:2181 --replication-factor 1 --partitions 1 --topic mykafka
+/opt/kafka/bin/kafka-topics.sh --list --zookeeper zookeeper-1:2181 mykafka
+/opt/kafka/bin/kafka-topics.sh --describe --zookeeper zookeeper-1:2181 --topic mykafka
+/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka-1:9092 --topic mykafka --from-beginning

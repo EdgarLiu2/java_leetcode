@@ -1,9 +1,9 @@
 REM COMPOSE_PROJECT_NAME=dev-leetcode
-docker-compose -p dev-leetcode -f docker-compose.dev.yml down
+docker-compose -p dev-leetcode -f docker-compose.dev.yml down --remove-orphans
 docker-compose -p dev-leetcode -f docker-compose.dev.yml up -d
 
-docker-compose -p dev-leetcode -f kafka.cluster.yml down
-docker-compose -p dev-leetcode -f kafka.cluster.yml up -d
+docker-compose -p dev-kafka -f kafka.cluster.yml down --remove-orphans
+docker-compose -p dev-kafka -f kafka.cluster.yml up -d
 
 
 
