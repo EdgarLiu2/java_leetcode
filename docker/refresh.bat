@@ -5,7 +5,7 @@ docker-compose -p dev-leetcode -f docker-compose.dev.yml up -d
 docker-compose -p dev-kafka -f kafka.cluster.yml down --remove-orphans
 docker-compose -p dev-kafka -f kafka.cluster.yml up -d
 
-
+docker image prune -a
 
 REM docker container exec -it dev-leetcode_mysql-db_1 bash
 mysql -uroot -p123456
