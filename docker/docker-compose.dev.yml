@@ -63,23 +63,23 @@ services:
       # interval: 30s
       # timeout: 10s
       # retries: 5
-  # rabbitmq:
-    # image: rabbitmq:3-management
-    # hostname: rabbitmq-server
-    # domainname: internal
-    # environment:
-      # - ENV=DEV
-      # - RABBITMQ_DEFAULT_USER=admin
-      # - RABBITMQ_DEFAULT_PASS=admin
-    # ports:
-      # - 5672:5672
-      # - 15672:15672
-    # restart: unless-stopped
-    # healthcheck:
-      # test: ["CMD", "curl", "-f", "http://localhost:5672"]
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq-server
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   # canal-server:
     # image: canal/canal-server:v1.1.4
     # hostname: canal-server
