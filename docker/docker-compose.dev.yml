@@ -167,6 +167,5 @@ services:
       - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
       - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
 
-
 volumes:
   redis_data:
