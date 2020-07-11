@@ -1,6 +1,8 @@
 REM COMPOSE_PROJECT_NAME=dev-leetcode
 docker-compose -p dev-leetcode -f docker-compose.dev.yml down --remove-orphans
 docker-compose -p dev-leetcode -f docker-compose.dev.yml up -d
+docker-compose -p dev-leetcode -f docker-compose.dev.yml stop elk-kibana-1
+docker-compose -p dev-leetcode -f docker-compose.dev.yml start elk-kibana-1
 
 docker-compose -p dev-kafka -f kafka.cluster.yml down --remove-orphans
 docker-compose -p dev-kafka -f kafka.cluster.yml up -d
@@ -20,6 +22,7 @@ REM docker container exec -it dev-leetcode_etcd-1_1 bash
 REM docker container exec -it dev-leetcode_zookeeper-1_1 bash
 REM docker container exec -it dev-leetcode_kafka-1_1 bash
 REM docker container exec -it dev-leetcode_kafka-manager_1 bash
+REM docker container exec -it dev-leetcode_elk-kibana-1_1 bash
 
 REM docker container logs dev-leetcode_mysql-db_1
 REM docker container logs dev-leetcode_canal-server_1
@@ -28,7 +31,8 @@ REM docker container logs dev-leetcode_etcd-1_1
 REM docker container logs dev-leetcode_zookeeper-1_1
 REM docker container logs dev-leetcode_kafka-1_1
 REM docker container logs dev-leetcode_kafka-manager_1
-
+REM docker container logs dev-leetcode_elk-elasticsearch-1_1
+REM docker container logs dev-leetcode_elk-kibana-1_1
 
 docker run -dit --name ubuntu ubuntu
 docker container exec -it ubuntu /bin/bash

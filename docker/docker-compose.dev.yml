@@ -63,23 +63,23 @@ services:
       # interval: 30s
       # timeout: 10s
       # retries: 5
-  rabbitmq:
-    image: rabbitmq:3-management
-    hostname: rabbitmq-server
-    domainname: internal
-    environment:
-      - ENV=DEV
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
-    ports:
-      - 5672:5672
-      - 15672:15672
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5672"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+  # rabbitmq:
+    # image: rabbitmq:3-management
+    # hostname: rabbitmq-server
+    # domainname: internal
+    # environment:
+      # - ENV=DEV
+      # - RABBITMQ_DEFAULT_USER=admin
+      # - RABBITMQ_DEFAULT_PASS=admin
+    # ports:
+      # - 5672:5672
+      # - 15672:15672
+    # restart: unless-stopped
+    # healthcheck:
+      # test: ["CMD", "curl", "-f", "http://localhost:5672"]
+      # interval: 30s
+      # timeout: 10s
+      # retries: 5
   # canal-server:
     # image: canal/canal-server:v1.1.4
     # hostname: canal-server
@@ -98,29 +98,29 @@ services:
     # ports:
       # - 11111:11111
     # restart: unless-stopped
-  zookeeper-1:
-    image: wurstmeister/zookeeper:latest
-    hostname: zookeeper-1
-    domainname: internal
-    ports:
-      - 2181:2181
-    restart: unless-stopped
-  kafka-1:
-    image: wurstmeister/kafka:latest
-    hostname: kafka-1
-    domainname: internal
-    depends_on:
-      - zookeeper-1
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
-      KAFKA_BROKER_ID: 1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-      KAFKA_CREATE_TOPICS: "mykafka:1:1"
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-    ports:
-      - 9092:9092
-    restart: unless-stopped
+  # zookeeper-1:
+    # image: wurstmeister/zookeeper:latest
+    # hostname: zookeeper-1
+    # domainname: internal
+    # ports:
+      # - 2181:2181
+    # restart: unless-stopped
+  # kafka-1:
+    # image: wurstmeister/kafka:latest
+    # hostname: kafka-1
+    # domainname: internal
+    # depends_on:
+      # - zookeeper-1
+    # environment:
+      # KAFKA_ADVERTISED_HOST_NAME: localhost
+      # KAFKA_BROKER_ID: 1
+      # KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      # KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      # KAFKA_CREATE_TOPICS: "mykafka:1:1"
+      # KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    # ports:
+      # - 9092:9092
+    # restart: unless-stopped
   zipkin-1: # https://github.com/openzipkin/zipkin#quick-start
     image: openzipkin/zipkin-slim
     hostname: zipkin-1
@@ -166,6 +166,46 @@ services:
       - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
       - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
       - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
-
+###############################################################################
+# Search
+  elk-elasticsearch-1:
+    # http://localhost:9200/_cat/health?v
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+    hostname: elk-elasticsearch-1
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    restart: unless-stopped
+    healthcheck:
+      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  elk-kibana-1:
+    image: docker.elastic.co/kibana/kibana:7.8.0
+    hostname: elk-kibana-1
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - SERVER_NAME=elk-kibana-1
+      - ELASTICSEARCH_HOSTS=http://elk-elasticsearch-1:9200
+      - ELASTICSEARCH_URL=http://elk-elasticsearch-1:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elk-elasticsearch-1
+    healthcheck:
+      test: curl -s http://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
 volumes:
   redis_data:
