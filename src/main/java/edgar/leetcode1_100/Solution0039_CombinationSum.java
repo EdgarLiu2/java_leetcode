@@ -26,12 +26,12 @@ public class Solution0039_CombinationSum {
 		// 先排序数组
 		Arrays.sort(candidates);
 		
-		dfs(candidates, target, path, result);
+		dfs(candidates, 0, target, path, result);
 		
 		return new ArrayList<List<Integer>>(result);
     }
 	
-	public static void dfs(int[] candidates, int restValue, Stack<Integer> path, Set<List<Integer>> result) {
+	public static void dfs(int[] candidates, int start, int restValue, Stack<Integer> path, Set<List<Integer>> result) {
 		if (restValue == 0) {
 			// 剩余为0，找到一个结果
 			List<Integer> r = new ArrayList<>(path);
@@ -40,10 +40,10 @@ public class Solution0039_CombinationSum {
 			return;
 		}
 		
-		for (int i = 0; i < candidates.length; i++) {
+		for (int i = start; i < candidates.length; i++) {
 			if (restValue >= candidates[i]) {
 				path.push(candidates[i]);
-				dfs(candidates, restValue - candidates[i], path, result);
+				dfs(candidates, i, restValue - candidates[i], path, result);
 				path.pop();
 			}
 		}
