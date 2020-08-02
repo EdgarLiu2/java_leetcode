@@ -189,7 +189,7 @@ public class RabbitMQUtil {
 		
 		if(!allKeys.isEmpty()) {
 			for (String key : allKeys.split(",")) {
-				keys.add(key.strip());
+				keys.add(key.trim());
 			}
 		}
 		

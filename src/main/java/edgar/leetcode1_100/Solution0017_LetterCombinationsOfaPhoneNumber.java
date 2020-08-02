@@ -3,6 +3,7 @@ package edgar.leetcode1_100;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,16 +21,27 @@ public class Solution0017_LetterCombinationsOfaPhoneNumber {
 			return Collections.emptyList();
 		}
 		
-		Map<String, String> numberCharacter = Map.of(
-				"2", "abc",
-				"3", "def",
-				"4", "ghi",
-				"5", "jkl",
-				"6", "mon",
-				"7", "pqrs",
-				"8", "tuv",
-				"9", "wxyz"
-		);
+//		Map<String, String> numberCharacter = Map.of(
+//				"2", "abc",
+//				"3", "def",
+//				"4", "ghi",
+//				"5", "jkl",
+//				"6", "mon",
+//				"7", "pqrs",
+//				"8", "tuv",
+//				"9", "wxyz"
+//		);
+		Map<String, String> numberCharacter = new HashMap<String, String>() {{
+			put("2", "abc");
+			put("3", "def");
+			put("4", "ghi");
+			put("5", "jkl");
+			put("6", "mon");
+			put("7", "pqrs");
+			put("8", "tuv");
+			put("9", "wxyz");
+		}};
+
 		/*
 		Map<String, String> numberCharacter = Map.ofEntries(
 				Map.entry("2", "abc"),

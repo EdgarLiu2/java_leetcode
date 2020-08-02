@@ -1,5 +1,6 @@
 package edgar.leetcode1_100;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -11,11 +12,16 @@ import java.util.Stack;
  *
  */
 public class Solution0020_ValidParentheses {
-	public static Map<Character, Character> parenthesesMap = Map.of(
-			Character.valueOf(')'), Character.valueOf('('), 
-			Character.valueOf(']'), Character.valueOf('['), 
-			Character.valueOf('}'), Character.valueOf('{') 
-	);
+//	public static Map<Character, Character> parenthesesMap = Map.of(
+//			Character.valueOf(')'), Character.valueOf('('), 
+//			Character.valueOf(']'), Character.valueOf('['), 
+//			Character.valueOf('}'), Character.valueOf('{') 
+//	);
+	public static Map<Character, Character> parenthesesMap = new HashMap<Character, Character>() {{
+		put(Character.valueOf(')'), Character.valueOf('('));
+		put(Character.valueOf(']'), Character.valueOf('['));
+		put(Character.valueOf('}'), Character.valueOf('{') );
+	}};
 	
 	public static boolean isValid(String s) {
 		if (s == null || s.isEmpty()) {

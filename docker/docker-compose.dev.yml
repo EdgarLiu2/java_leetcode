@@ -183,6 +183,7 @@ services:
         hard: -1
     ports:
       - 9200:9200
+      - 9300:9300
     restart: unless-stopped
     healthcheck:
       test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
