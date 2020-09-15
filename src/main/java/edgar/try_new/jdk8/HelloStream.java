@@ -91,8 +91,12 @@ public class HelloStream {
 		
 		// 是否年龄都大于20
 		boolean allMatch = students.stream().allMatch(item -> item.getAge() > 20);
+		assert !allMatch;
+		
 		// 是否有年龄大于20
 		boolean anyMatch = students.stream().anyMatch(item -> item.getAge() > 20);
+		assert !anyMatch;
+		
 		// 没有人叫Student10
 		boolean noneMatch = students.stream().noneMatch(item -> item.getName().equals("Student10"));
 		// 第一个学生
