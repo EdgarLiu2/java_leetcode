@@ -1,13 +1,14 @@
 REM COMPOSE_PROJECT_NAME=dev-leetcode
 docker-compose -p dev-leetcode -f docker-compose.dev.yml down --remove-orphans
 docker-compose -p dev-leetcode -f docker-compose.dev.yml up -d
-docker-compose -p dev-leetcode -f docker-compose.dev.yml stop elk-kibana-1
-docker-compose -p dev-leetcode -f docker-compose.dev.yml start elk-kibana-1
+docker-compose -p dev-leetcode -f docker-compose.dev.yml down sonarqube
+docker-compose -p dev-leetcode -f docker-compose.dev.yml up sonarqube -d
 
 docker-compose -p dev-kafka -f kafka.cluster.yml down --remove-orphans
 docker-compose -p dev-kafka -f kafka.cluster.yml up -d
 
 docker image prune -a
+docker volume prune
 
 REM docker container exec -it dev-leetcode_mysql-db_1 bash
 mysql -uroot -p123456
@@ -68,3 +69,22 @@ apt-get -y install iputils-ping
 </mirror>
 
 # Docker mirror: https://r3cphckj.mirror.aliyuncs.com
+
+
+# Swarm
+
+docker swarm init --advertise-addr=192.168.1.29
+docker swarm join --token
+docker swarm join-token manager
+docker node ls
+docker swarm leave -f
+
+docker service create -p 8888:8080 --name my-tomcat tomcat:latest
+docker service ls
+docker service ps my-tomcat
+docker service scale my-tomcat=2
+docker service rm my-tomcat
+
+https://www.portainer.io/
+docker volume create portainer_data
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
