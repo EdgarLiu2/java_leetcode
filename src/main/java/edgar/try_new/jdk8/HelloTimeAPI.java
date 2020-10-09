@@ -24,7 +24,7 @@ import java.util.Set;
  */
 public class HelloTimeAPI {
 	
-	public static void test_LocalDate() {
+	public static void testLocalDate() {
 		LocalDate today = LocalDate.now();
 		System.out.println(today);
 		
@@ -38,7 +38,7 @@ public class HelloTimeAPI {
 		System.out.println(sameDayLastMonth);
 		
 		boolean leapYear = today.isLeapYear();
-		assert !leapYear;
+		assert leapYear;
 		boolean isAfter = tomorrow.isAfter(today);
 		assert isAfter;
 		
@@ -51,7 +51,7 @@ public class HelloTimeAPI {
 		System.out.println(firstDayOfMonth);
 	}
 	
-	public static void test_LocalTime() {
+	public static void testLocalTime() {
 		LocalTime now = LocalTime.now();
 		System.out.println(now);
 		
@@ -67,7 +67,7 @@ public class HelloTimeAPI {
 		System.out.println(LocalTime.MAX);
 	}
 	
-	public static void test_LocalDateTime() {
+	public static void testLocalDateTime() {
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println(now);
 		System.out.println(now.plusDays(1));
@@ -77,9 +77,9 @@ public class HelloTimeAPI {
 		System.out.println(LocalDateTime.parse("2019-02-20T06:30:00"));
 	}
 	
-	public static void test_ZonedDateTime() {
+	public static void testZonedDateTime() {
 		Set<String> allZoneIds = ZoneId.getAvailableZoneIds();
-		List<String> listZones = new ArrayList<String>(allZoneIds);
+		List<String> listZones = new ArrayList<>(allZoneIds);
 		Collections.sort(listZones);
 		for(String zoneId : listZones) {
 			System.out.println(zoneId);
@@ -91,16 +91,17 @@ public class HelloTimeAPI {
 		System.out.println(zonedDateTime);
 	}
 	
-	public static void test_Period() {
+	public static void testPeriod() {
 		LocalDate initialDate = LocalDate.parse("2007-05-10");
 		LocalDate finalDate = initialDate.plus(Period.ofDays(5));
 		
 		int five = Period.between(finalDate, initialDate).getDays();
+		System.out.println(five);
 		five = (int) ChronoUnit.DAYS.between(finalDate , initialDate);
 		System.out.println(five);
 	}
 	
-	public static void test_DateFormat() {
+	public static void testDateFormat() {
 		LocalDateTime now = LocalDateTime.now();
 		
 		String localDateString = now.format(DateTimeFormatter.ISO_DATE_TIME);
@@ -108,12 +109,12 @@ public class HelloTimeAPI {
 	}
 
 	public static void main(String[] args) {
-		test_LocalDate();
-		test_LocalTime();
-		test_LocalDateTime();
-		test_ZonedDateTime();
-		test_Period();
-		test_DateFormat();
+		testLocalDate();
+		testLocalTime();
+		testLocalDateTime();
+		testZonedDateTime();
+		testPeriod();
+		testDateFormat();
 	}
 
 }

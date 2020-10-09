@@ -18,38 +18,42 @@ import java.util.stream.Stream;
  */
 public class HelloStream {
 	@SuppressWarnings("unused")
-	public static void create_test1() {
+	public static void createTest1() {
 		// 方式一：通过一个集合创建Stream
 		List<Student> students = Student.getStudents();
 		// 顺序流
 		Stream<Student> stream1 = students.stream();
+		stream1.forEach(System.out::println);
 		// 并行流
 		Stream<Student> stream2 = students.parallelStream();
+		stream2.forEach(System.out::println);
 	}
 	
 	@SuppressWarnings("unused")
-	public static void create_test2() {
+	public static void createTest2() {
 		// 方式二：通过一个数组创建Stream
-		int[] i_array = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
-		IntStream intStream = Arrays.stream(i_array);
+		int[] intArray = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		IntStream intStream = Arrays.stream(intArray);
+		intStream.forEach(System.out::println);
 	}
 	
 	@SuppressWarnings("unused")
-	public static void create_test3() {
+	public static void createTest3() {
 		// 方式三：通过Stream.of
-		Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+		Stream<Integer> intStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+		intStream.forEach(System.out::println);
 	}
 	
-	public static void create_test4() {
+	public static void createTest4() {
 		// 每隔5个数取一个，从0开始，无限循环
-		// Stream.iterate(0,  t -> t+5).forEach(System.out::println);
+		// Stream.iterate(0,  t -> t+5).forEach(System.out::println)
 		// 每隔5个数取一个，从0开始，取前10个
 		Stream.iterate(0,  t -> t+5).limit(10).forEach(System.out::println);
 		// 取随机数
 		Stream.generate(Math::random).limit(5).forEach(System.out::println);
 	}
 	
-	public static void filter_test5() {
+	public static void filterTest5() {
 		List<Student> students = Student.getStudents();
 		
 		// 1. 过滤年龄大于15
@@ -62,7 +66,7 @@ public class HelloStream {
 		students.stream().distinct().forEach(System.out::println);
 	}
 	
-	public static void map_test6() {
+	public static void mapTest6() {
 		// 小写字母转大写
 		List<String> strings = Arrays.asList("java", "python", "go");
 		strings.stream().map(str -> str.toUpperCase()).forEach(System.out::println);
@@ -73,7 +77,7 @@ public class HelloStream {
 		stream1.filter(age -> age > 15).forEach(System.out::println);
 	}
 	
-	public static void sort_test7() {
+	public static void sortTest7() {
 		// 直接排序，如果对象实现了Comparable接口
 		List<Integer> intList = Arrays.asList(56, 4, 56, 7, 8, 4, 4, 5, 654, 346, 3453, 4634, 5);
 		intList.stream().sorted().forEach(System.out::println);
@@ -86,7 +90,7 @@ public class HelloStream {
 	}
 	
 	@SuppressWarnings("unused")
-	public static void match_test8() {
+	public static void matchTest8() {
 		List<Student> students = Student.getStudents();
 		
 		// 是否年龄都大于20
@@ -99,18 +103,21 @@ public class HelloStream {
 		
 		// 没有人叫Student10
 		boolean noneMatch = students.stream().noneMatch(item -> item.getName().equals("Student10"));
+		System.out.println("noneMatch=" + noneMatch);
 		// 第一个学生
 		Optional<Student> first = students.stream().findFirst();
 		first.ifPresent(System.out::println);
 		// 学生数量
 		long count1 = students.stream().count();
+		System.out.println("count1=" + count1);
 		long count2 = students.stream().filter(item -> item.getAge() > 14).count();
+		System.out.println("count2=" + count2);
 		// 查找最高分
 		Stream<Double> scores = students.stream().map(Student::getScore);
 		scores.max(Double::compare).ifPresent(System.out::println);
 	}
 	
-	public static void reduce_test9() {
+	public static void reduceTest9() {
 		// 求和
 		List<Integer> intList = Arrays.asList(56, 4, 56, 7, 8, 4, 4, 5, 654, 346, 3453, 4634, 5);
 		int sum = intList.stream().reduce(0, Integer::sum);
@@ -122,25 +129,27 @@ public class HelloStream {
 	}
 	
 	@SuppressWarnings("unused")
-	public static void collect_test10() {
+	public static void collectTest10() {
 		List<Student> students = Student.getStudents();
 		
 		// 返回一个List
 		List<Student> studentsAge14 = students.stream().filter(e -> e.getAge() > 14).collect(Collectors.toList());
+		studentsAge14.stream().forEach(System.out::println);
 		// 返回一个Set
 		Set<Student> studentsAge16 = students.stream().filter(e -> e.getAge() > 16).collect(Collectors.toSet());
+		studentsAge16.stream().forEach(System.out::println);
 	}
 	
 	public static void main(String[] args) {
-		create_test4();
+		createTest4();
 		
 		// 使用Stream操作数据
-		filter_test5();
-		map_test6();
-		sort_test7();
-		match_test8();
-		reduce_test9();
-		collect_test10();
+		filterTest5();
+		mapTest6();
+		sortTest7();
+		matchTest8();
+		reduceTest9();
+		collectTest10();
 	}
 }
 

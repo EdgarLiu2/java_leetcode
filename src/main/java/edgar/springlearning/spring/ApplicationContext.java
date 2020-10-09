@@ -183,15 +183,7 @@ public class ApplicationContext {
 						}
 						
 						if (BeanPostProcessor.class.isAssignableFrom(clazz)) {
-
-							try {
-								BeanPostProcessor postProcessor = (BeanPostProcessor)clazz.getDeclaredConstructor().newInstance();
-								this.beanPostProcessorList.add(postProcessor);
-							} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-									| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-								logger.error(String.format("Fail to create instance of class: %s ", clazz.getSimpleName()), e);
-							}
-							
+							addBeanPostProcessor(clazz);
 						}
 						
 						// 生成beanDefinition对象
@@ -205,6 +197,18 @@ public class ApplicationContext {
 			}
 		}
 		
+	}
+
+
+
+	private void addBeanPostProcessor(Class<?> clazz) {
+		try {
+			BeanPostProcessor postProcessor = (BeanPostProcessor)clazz.getDeclaredConstructor().newInstance();
+			this.beanPostProcessorList.add(postProcessor);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			logger.error(String.format("Fail to create instance of class: %s ", clazz.getSimpleName()), e);
+		}
 	}
 	
 }

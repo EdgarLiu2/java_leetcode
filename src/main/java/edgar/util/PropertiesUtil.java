@@ -27,7 +27,7 @@ public class PropertiesUtil {
 			try {
 				props.load(input);
 			} catch (IOException e) {
-				logger.error("Can't load from props file " + propFileName, e);
+				logger.error(String.format("Can't load from props file %s", propFileName), e);
 			}
 		} else {
 			logger.warn("Fail to find props file: {}", propFileName);

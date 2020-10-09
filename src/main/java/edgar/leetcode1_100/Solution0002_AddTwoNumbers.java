@@ -10,7 +10,8 @@ package edgar.leetcode1_100;
  */
 public class Solution0002_AddTwoNumbers {
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		ListNode l3 = new ListNode(-1), l3p = l3;
+		ListNode l3 = new ListNode(-1);
+		ListNode l3p = l3;
 		int carry = 0;
 
 		while (l1 != null && l2 != null) {
@@ -98,18 +99,18 @@ public class Solution0002_AddTwoNumbers {
 		 */
 		int[] a1 = {2,4,3};
 		int[] a2 = {5,6,4};
-		ListNode a1_2 = addTwoNumbers(arrayToListNode(a1), arrayToListNode(a2));
-		printListNode(a1_2);
+		ListNode a1plus2 = addTwoNumbers(arrayToListNode(a1), arrayToListNode(a2));
+		printListNode(a1plus2);
 		
 		int[] b1 = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
 		int[] b2 = {5,6,4};
-		ListNode b1_2 = addTwoNumbers(arrayToListNode(b1), arrayToListNode(b2));
-		printListNode(b1_2);
+		ListNode b1plus2 = addTwoNumbers(arrayToListNode(b1), arrayToListNode(b2));
+		printListNode(b1plus2);
 		
 		int[] c1 = {1,8};
 		int[] c2 = {0};
-		ListNode c1_2 = addTwoNumbers(arrayToListNode(c1), arrayToListNode(c2));
-		printListNode(c1_2);
+		ListNode c1plus2 = addTwoNumbers(arrayToListNode(c1), arrayToListNode(c2));
+		printListNode(c1plus2);
 	}
 
 }

@@ -3,6 +3,9 @@ package edgar.util;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.etcd.jetcd.ByteSequence;
 import io.etcd.jetcd.Client;
 import io.etcd.jetcd.KV;
@@ -16,10 +19,11 @@ import io.etcd.jetcd.kv.PutResponse;
  *
  */
 public class JetcdUtil {
-	private String etcd_host;
-	private int etcd_port;
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private Client client;
+	private String etcdHost;
+	private int etcdPort;
+	
 	private KV kvClient;
 
 	public JetcdUtil() {
@@ -27,9 +31,9 @@ public class JetcdUtil {
 	}
 	
 	public JetcdUtil(String host, int port) {
-		this.etcd_host = host;
-		this.etcd_port = port;
-		String url = String.format("http://%s:%d", this.etcd_host, this.etcd_port);
+		this.etcdHost = host;
+		this.etcdPort = port;
+		String url = String.format("http://%s:%d", this.etcdHost, this.etcdPort);
 		
 		connect(url);
 	}
@@ -39,7 +43,7 @@ public class JetcdUtil {
 	}
 	
 	private void connect(String[] urls) {
-		client = Client.builder().endpoints(urls).build();
+		Client client = Client.builder().endpoints(urls).build();
 		kvClient = client.getKVClient();
 	}
 	
@@ -48,10 +52,13 @@ public class JetcdUtil {
 		ByteSequence valueBytes = ByteSequence.from(value.getBytes());
 		
 		try {
-			PutResponse response= kvClient.put(keyBytes, valueBytes).get();
+			PutResponse response = kvClient.put(keyBytes, valueBytes).get();
 			System.out.println(response);
 		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+			logger.error(String.format("Failed to add new key. key=%s value=%s", key, value), e);
+			
+			// Restore interrupted state
+			Thread.currentThread().interrupt();
 		}
 	}
 	
@@ -66,8 +73,10 @@ public class JetcdUtil {
 		try {
 			response = getFuture.get();
 		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(String.format("Failed to get value of key. key=%s", key), e);
+			
+			// Restore interrupted state
+			Thread.currentThread().interrupt();
 		}
 		
 		return response;
@@ -80,7 +89,10 @@ public class JetcdUtil {
 		try {
 			kvClient.delete(keyBytes).get();
 		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+			logger.error(String.format("Failed to delete key. key=%s", key), e);
+			
+			// Restore interrupted state
+			Thread.currentThread().interrupt();
 		}
 	}
 	

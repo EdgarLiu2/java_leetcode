@@ -32,7 +32,7 @@ public class Solution0001_TwoSum {
     }
 	
 	public static int[] twoSum2(int[] nums, int target) {
-		Map<Integer, Integer> cache = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> cache = new HashMap<>();
 		
 		for(int i = 0; i < nums.length ; i++) {
 			int numA = nums[i];

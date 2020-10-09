@@ -15,9 +15,9 @@ import redis.clients.jedis.Jedis;
 public class ItemRedisCache {
 	final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private String redis_host;
-	private int redis_port;
-	private Jedis redis_connection;
+	private String redisHost;
+	private int redisPort;
+	private Jedis redisConnection;
 	private static String ITEM_REDIS_KEYBASE = "leetcode:canal:item"; 
 			
 
@@ -26,15 +26,15 @@ public class ItemRedisCache {
 	}
 	
 	public ItemRedisCache(String host, int port) {
-		this.redis_host = host;
-		this.redis_port = port;
+		this.redisHost = host;
+		this.redisPort = port;
 		
 		connect();
 	}
 	
 	private void connect() {
-		redis_connection = new Jedis(this.redis_host, this.redis_port);
-		logger.info("Connected Redis Server: {}:{}", this.redis_host, this.redis_port);
+		redisConnection = new Jedis(this.redisHost, this.redisPort);
+		logger.info("Connected Redis Server: {}:{}", this.redisHost, this.redisPort);
 	}
 	
 	private String getItemKey(String itemName) {
@@ -46,12 +46,12 @@ public class ItemRedisCache {
 	}
 	
 	public void setValue(String itemName, String itemValue) {
-		redis_connection.set(getItemKey(itemName), itemValue);
+		redisConnection.set(getItemKey(itemName), itemValue);
 		logger.info("Updated value of {} to {}", itemName, itemValue);
 	}
 	
 	public int getValue(String itemName) {
-		String value = redis_connection.get(getItemKey(itemName));
+		String value = redisConnection.get(getItemKey(itemName));
 		return Integer.parseInt(value);
 	}
 }
