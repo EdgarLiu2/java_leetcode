@@ -1,4 +1,4 @@
-package edgar.dubbolearning.study.reistryCenter;
+package edgar.dubbolearning.study.framework;
 
 public class URL {
 	private String hostname;

@@ -1,10 +1,10 @@
 package edgar.dubbolearning.study.provider;
 
+import edgar.dubbolearning.study.framework.URL;
 import edgar.dubbolearning.study.protocal.http.HttpServer;
 import edgar.dubbolearning.study.provider.api.HelloService;
 import edgar.dubbolearning.study.provider.impl.HelloServiceImpl;
 import edgar.dubbolearning.study.reistryCenter.RemoteMapRegister;
-import edgar.dubbolearning.study.reistryCenter.URL;
 
 public class Provider {
 

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import edgar.dubbolearning.study.framework.URL;
+
 public class RemoteMapRegister {
 
 	private static Map<String, List<URL>> REGISTER = new ConcurrentHashMap<>();
