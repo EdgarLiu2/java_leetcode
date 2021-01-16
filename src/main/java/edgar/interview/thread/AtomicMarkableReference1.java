@@ -1,23 +1,22 @@
 package edgar.interview.thread;
 
-import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.atomic.AtomicMarkableReference;
 
-public class AtomicStampedReference1 {
+public class AtomicMarkableReference1 {
 	
-	static AtomicStampedReference<Order> orderRef = new AtomicStampedReference<>(new Order(), 0);
+	static AtomicMarkableReference<Order> orderRef = new AtomicMarkableReference<>(new Order(), false);
 
 	public static void main(String[] args) {
 
 		for(int i = 0; i < 100; i++) {
 			new Thread(() -> {
 				Order old = orderRef.getReference();
-				int stamp = orderRef.getStamp();
 				
 				Order newOrder = new Order();
 				newOrder.sequence = old.sequence + 1;
 				newOrder.time = System.currentTimeMillis();
 				
-				orderRef.compareAndSet(old, newOrder, stamp, stamp + 1);
+				orderRef.compareAndSet(old, newOrder, false, true);
 			}).start();
 		}
 		
@@ -30,15 +29,4 @@ public class AtomicStampedReference1 {
 		System.out.println(orderRef.getReference());
 	}
 
-}
-
-class Order {
-	long sequence;
-	long time;
-	
-	@Override
-	public String toString() {
-		return "Order [sequence=" + sequence + ", time=" + time + "]";
-	}
-	
 }
