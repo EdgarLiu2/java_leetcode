@@ -52,15 +52,6 @@ public class Solution0031_NextPermutation {
         	swap(nums, lo++, hi--);
         }
     }
-	
-	public static void print_array(int[] nums, int len) {
-		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < len; i++) {
-			buf.append(nums[i] + " ");
-		}
-		
-		System.out.println(buf.toString());
-	}
 
 	public static void main(String[] args) {
 		int[] nums;
@@ -71,7 +62,7 @@ public class Solution0031_NextPermutation {
 		 */
 		nums= new int[] {1,2,3};
 		nextPermutation(nums);
-		print_array(nums, nums.length);
+		Util.printOneDimIntArray(nums, nums.length);
 		assert Arrays.equals(nums, new int[] {1,3,2});
 		
 		/*
@@ -80,7 +71,7 @@ public class Solution0031_NextPermutation {
 		 */
 		nums= new int[] {3,2,1};
 		nextPermutation(nums);
-		print_array(nums, nums.length);
+		Util.printOneDimIntArray(nums, nums.length);
 		assert Arrays.equals(nums, new int[] {1,2,3});
 		
 		/*
@@ -89,7 +80,7 @@ public class Solution0031_NextPermutation {
 		 */
 		nums= new int[] {1,1,5};
 		nextPermutation(nums);
-		print_array(nums, nums.length);
+		Util.printOneDimIntArray(nums, nums.length);
 		assert Arrays.equals(nums, new int[] {1,2,3});
 	}
 

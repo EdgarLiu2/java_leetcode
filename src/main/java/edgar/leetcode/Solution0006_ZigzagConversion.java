@@ -14,22 +14,6 @@ import java.util.List;
  */
 public class Solution0006_ZigzagConversion {
 	
-	public static void printTwoDimArray(char[][] arrays) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(String.format("rows: %d, cols: %d\n", arrays.length, arrays[0].length));
-		
-		for(int row = 0; row < arrays.length; row++) {
-			for(int col = 0; col < arrays[0].length; col++) {
-				char c = arrays[row][col];
-				builder.append(String.format("%s ", c == '\0' ? "*" : c));
-			}
-			
-			builder.append("\n");
-		}
-		
-		System.out.println(builder.toString());
-	}
-	
 	public static String convert1(String s, int numRows) {
 		if (numRows == 1) {
 			return s;
@@ -66,7 +50,7 @@ public class Solution0006_ZigzagConversion {
 			}
 		}
 		
-		printTwoDimArray(tmpArrays);
+		Util.printTwoDimArray(tmpArrays);
 		
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < numRows; i++) {
