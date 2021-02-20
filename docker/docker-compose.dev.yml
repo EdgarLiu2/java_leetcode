@@ -13,12 +13,12 @@ services:
     # domainname: internal
     # restart: always
     # tty: true
-  sonarqube:
-    image: sonarqube
-    hostname: sonarqube-1
-    domainname: internal
-    ports:
-      - 9000:9000
+  # sonarqube:
+    # image: sonarqube
+    # hostname: sonarqube-1
+    # domainname: internal
+    # ports:
+      # - 9000:9000
 ###############################################################################
 # Middleware
   # etcd-1:
@@ -101,6 +101,13 @@ services:
     ports:
       - 9411:9411
     restart: unless-stopped
+  consul-1:
+    image: consul:latest
+    hostname: consul-1
+    domainname: internal
+    ports:
+      - 8500:8500
+    command: "agent -server -bootstrap -ui -client 0.0.0.0"
 ###############################################################################
 # MessageQueue
   # rabbitmq:
@@ -164,16 +171,16 @@ services:
     ports:
       - 3306:3306
     restart: unless-stopped
-    healthcheck:
-      #test: /usr/bin/mysqladmin ping -h localhost --user=test --password=test
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--user=test", "--password=test"]
-      interval: 5s
-      timeout: 2s
-      retries: 3
-    volumes:
-      - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
-      - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
-      - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
+  #   healthcheck:
+  #     #test: /usr/bin/mysqladmin ping -h localhost --user=test --password=test
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--user=test", "--password=test"]
+  #     interval: 5s
+  #     timeout: 2s
+  #     retries: 3
+  #   volumes:
+  #     - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
+  #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
+  #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
 ###############################################################################
 # Search
   # elk-elasticsearch-1:
