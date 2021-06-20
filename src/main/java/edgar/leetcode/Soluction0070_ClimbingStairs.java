@@ -74,7 +74,7 @@ public class Soluction0070_ClimbingStairs {
 		
 		/*
 		 * 输入： 45
-		 * 输出： 3
+		 * 输出： 1836311903
 		 */
 		assert 1836311903 == climbStairs(45);
 	}
