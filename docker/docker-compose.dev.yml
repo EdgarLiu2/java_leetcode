@@ -21,33 +21,33 @@ services:
       # - 9000:9000
 ###############################################################################
 # Middleware
-  etcd-0:
-      image: quay.io/coreos/etcd:latest
-      hostname: etcd-0
-      domainname: internal
-      environment:
-        - TZ=CST-8
-      command: [
-        "etcd",
-        "--name=etcd-0",
-        "--advertise-client-urls=http://etcd-0:2379,http://etcd-0:4001",
-        "--listen-client-urls=http://0.0.0.0:2379,http://0.0.0.0:4001",
-        "--initial-advertise-peer-urls=http://etcd-0:2380",
-        "--listen-peer-urls=http://0.0.0.0:2380",
-        "--initial-cluster-token=etcd-cluster-1",
-        "--initial-cluster=etcd-0=http://etcd-0:2380",
-        "--initial-cluster-state=new"
-      ]
-      ports:
-        - 2379:2379
-        - 2380:2380
-        - 4001:4001
-      restart: unless-stopped
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:2379"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
+  # etcd-0:
+  #     image: quay.io/coreos/etcd:latest
+  #     hostname: etcd-0
+  #     domainname: internal
+  #     environment:
+  #       - TZ=CST-8
+  #     command: [
+  #       "etcd",
+  #       "--name=etcd-0",
+  #       "--advertise-client-urls=http://etcd-0:2379,http://etcd-0:4001",
+  #       "--listen-client-urls=http://0.0.0.0:2379,http://0.0.0.0:4001",
+  #       "--initial-advertise-peer-urls=http://etcd-0:2380",
+  #       "--listen-peer-urls=http://0.0.0.0:2380",
+  #       "--initial-cluster-token=etcd-cluster-1",
+  #       "--initial-cluster=etcd-0=http://etcd-0:2380",
+  #       "--initial-cluster-state=new"
+  #     ]
+  #     ports:
+  #       - 2379:2379
+  #       - 2380:2380
+  #       - 4001:4001
+  #     restart: unless-stopped
+  #     healthcheck:
+  #       test: ["CMD", "curl", "-f", "http://localhost:2379"]
+  #       interval: 30s
+  #       timeout: 10s
+  #       retries: 5
   # etcd-1:
     # image: quay.io/coreos/etcd:latest
     # hostname: etcd-1
@@ -121,21 +121,21 @@ services:
     # ports:
       # - 2181:2181
     # restart: unless-stopped
-  zipkin-1: # https://github.com/openzipkin/zipkin#quick-start
-    image: openzipkin/zipkin-slim
-    hostname: zipkin-1
-    domainname: internal
-    ports:
-      - 9411:9411
-    restart: unless-stopped
-  consul-1:
-    image: consul:latest
-    hostname: consul-1
-    domainname: internal
-    ports:
-      - 8500:8500
-    command: "agent -server -bootstrap -ui -client 0.0.0.0"
-    restart: unless-stopped
+  # zipkin-1: # https://github.com/openzipkin/zipkin#quick-start
+  #   image: openzipkin/zipkin-slim
+  #   hostname: zipkin-1
+  #   domainname: internal
+  #   ports:
+  #     - 9411:9411
+  #   restart: unless-stopped
+  # consul-1:
+  #   image: consul:latest
+  #   hostname: consul-1
+  #   domainname: internal
+  #   ports:
+  #     - 8500:8500
+  #   command: "agent -server -bootstrap -ui -client 0.0.0.0"
+  #   restart: unless-stopped
 ###############################################################################
 # MessageQueue
   # rabbitmq:
@@ -211,45 +211,48 @@ services:
   #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
 ###############################################################################
 # Search
-  # elk-elasticsearch-1:
-    # http://localhost:9200/_cat/health?v
-    # image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
-    # hostname: elk-elasticsearch-1
-    # domainname: internal
-    # environment:
-      # - ENV=DEV
-      # - ES_JAVA_OPTS=-Xms256m -Xmx256m
-      # - discovery.type=single-node
-    # ulimits:
-      # memlock:
-        # soft: -1
-        # hard: -1
-    # ports:
-      # - 9200:9200
-      # - 9300:9300
-    # restart: unless-stopped
-    # healthcheck:
-      # test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
-  # elk-kibana-1:
-    # image: docker.elastic.co/kibana/kibana:7.8.0
-    # hostname: elk-kibana-1
-    # domainname: internal
-    # environment:
-      # - ENV=DEV
-      # - SERVER_NAME=elk-kibana-1
-      # - ELASTICSEARCH_HOSTS=http://elk-elasticsearch-1:9200
-      # - ELASTICSEARCH_URL=http://elk-elasticsearch-1:9200
-    # ports:
-      # - 5601:5601
-    # depends_on:
-      # - elk-elasticsearch-1
-    # healthcheck:
-      # test: curl -s http://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
-# volumes:
-  # redis_data:
+# https://hub.docker.com/_/elasticsearch?tab=tags&page=1&ordering=last_updated
+# https://hub.docker.com/_/kibana?tab=tags&page=1&ordering=last_updated
+# http://localhost:9200/_cat/health?v
+# http://localhost:5601
+  elk-elasticsearch-1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+    hostname: elk-elasticsearch-1
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    restart: unless-stopped
+    healthcheck:
+      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  elk-kibana-1:
+    image: docker.elastic.co/kibana/kibana:7.14.1
+    hostname: elk-kibana-1
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - SERVER_NAME=elk-kibana-1
+      - ELASTICSEARCH_HOSTS=http://elk-elasticsearch-1:9200
+      - ELASTICSEARCH_URL=http://elk-elasticsearch-1:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elk-elasticsearch-1
+    healthcheck:
+      test: curl -s http://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+volumes:
+  redis_data:

@@ -17,6 +17,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<elasticsearch.version>7.14.1</elasticsearch.version>
+		<canal.version>1.1.5</canal.version>
 	</properties>
 
 	<dependencies>
@@ -24,76 +26,101 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>3.3.0</version>
+			<version>3.7.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.client -->
 		<dependency>
 			<groupId>com.alibaba.otter</groupId>
 			<artifactId>canal.client</artifactId>
-			<version>1.1.4</version>
+			<version>${canal.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.protocol -->
+		<dependency>
+		    <groupId>com.alibaba.otter</groupId>
+		    <artifactId>canal.protocol</artifactId>
+		    <version>${canal.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.common -->
+		<dependency>
+		    <groupId>com.alibaba.otter</groupId>
+		    <artifactId>canal.common</artifactId>
+		    <version>${canal.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
-			<version>5.9.0</version>
+			<version>5.13.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
 		<dependency>
 		    <groupId>org.apache.kafka</groupId>
 		    <artifactId>kafka-clients</artifactId>
-		    <version>2.5.0</version>
+		    <version>3.0.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.etcd/jetcd-core -->
 		<dependency>
 			<groupId>io.etcd</groupId>
 			<artifactId>jetcd-core</artifactId>
-			<version>0.5.3</version>
+			<version>0.5.10</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
 		    <groupId>com.google.guava</groupId>
 		    <artifactId>guava</artifactId>
-		    <version>29.0-jre</version>
+		    <version>30.1.1-jre</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.30</version>
+			<version>1.7.32</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.6</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.6</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
 		    <artifactId>tomcat-embed-core</artifactId>
-		    <version>10.0.2</version>
+		    <version>10.0.11</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.openjdk.jol/jol-core -->
 		<dependency>
 		    <groupId>org.openjdk.jol</groupId>
 		    <artifactId>jol-core</artifactId>
-		    <version>0.14</version>
+		    <version>0.16</version>
 		    <scope>provided</scope>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
+		<dependency>
+			<!-- Elasticsearch subproject :client:rest-high-level -->
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+			<version>${elasticsearch.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/transport -->
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
+			<version>${elasticsearch.version}</version>
+		</dependency>
 		
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
