@@ -10,7 +10,7 @@ import java.util.Map;
  * @author liuzhao
  *
  */
-public class Soluction0070_ClimbingStairs {
+public class Solution0070_ClimbingStairs {
 	
 	static Map<Integer, Integer> localCache = new HashMap<>();
 	

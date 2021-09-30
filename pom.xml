@@ -101,19 +101,6 @@
 		    <version>0.16</version>
 		    <scope>provided</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
-		<dependency>
-			<!-- Elasticsearch subproject :client:rest-high-level -->
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<version>${elasticsearch.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/transport -->
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>transport</artifactId>
-			<version>${elasticsearch.version}</version>
-		</dependency>
 		
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
