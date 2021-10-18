@@ -187,6 +187,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    volumes:
+      - redis_data:/data
   # mysql-db:
   #   image: mysql:latest
   #   hostname: mysql-db
@@ -209,50 +211,68 @@ services:
   #     - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
   #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
   #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
+  clickhouse-db:
+    image: yandex/clickhouse-server:latest
+    hostname: clickhouse-db
+    domainname: internal
+    environment:
+      - ENV=DEV
+    ports:
+      - 8123:8123
+      - 9009:9009
+      - 9090:9090
+    restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    # volumes:
+    #     - /Users/liuzhao/Downloads
+    #   - $HOME/some_clickhouse_database:/var/lib/clickhouse
 ###############################################################################
 # Search
 # https://hub.docker.com/_/elasticsearch?tab=tags&page=1&ordering=last_updated
 # https://hub.docker.com/_/kibana?tab=tags&page=1&ordering=last_updated
 # http://localhost:9200/_cat/health?v
 # http://localhost:5601
-  elk-elasticsearch-1:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
-    hostname: elk-elasticsearch-1
-    domainname: internal
-    environment:
-      - ENV=DEV
-      - ES_JAVA_OPTS=-Xms256m -Xmx256m
-      - discovery.type=single-node
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    ports:
-      - 9200:9200
-      - 9300:9300
-    restart: unless-stopped
-    healthcheck:
-      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
-  elk-kibana-1:
-    image: docker.elastic.co/kibana/kibana:7.14.1
-    hostname: elk-kibana-1
-    domainname: internal
-    environment:
-      - ENV=DEV
-      - SERVER_NAME=elk-kibana-1
-      - ELASTICSEARCH_HOSTS=http://elk-elasticsearch-1:9200
-      - ELASTICSEARCH_URL=http://elk-elasticsearch-1:9200
-    ports:
-      - 5601:5601
-    depends_on:
-      - elk-elasticsearch-1
-    healthcheck:
-      test: curl -s http://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
+  # elk-elasticsearch-1:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+  #   hostname: elk-elasticsearch-1
+  #   domainname: internal
+  #   environment:
+  #     - ENV=DEV
+  #     - ES_JAVA_OPTS=-Xms256m -Xmx256m
+  #     - discovery.type=single-node
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   ports:
+  #     - 9200:9200
+  #     - 9300:9300
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 5
+  # elk-kibana-1:
+  #   image: docker.elastic.co/kibana/kibana:7.14.1
+  #   hostname: elk-kibana-1
+  #   domainname: internal
+  #   environment:
+  #     - ENV=DEV
+  #     - SERVER_NAME=elk-kibana-1
+  #     - ELASTICSEARCH_HOSTS=http://elk-elasticsearch-1:9200
+  #     - ELASTICSEARCH_URL=http://elk-elasticsearch-1:9200
+  #   ports:
+  #     - 5601:5601
+  #   depends_on:
+  #     - elk-elasticsearch-1
+  #   healthcheck:
+  #     test: curl -s http://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 5
 volumes:
   redis_data:
