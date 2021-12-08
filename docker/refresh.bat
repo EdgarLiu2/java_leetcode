@@ -26,6 +26,7 @@ REM docker container exec -it dev-leetcode_kafka-manager_1 bash
 REM docker container exec -it dev-leetcode_elk-kibana-1_1 bash
 REM docker container exec -it dev-leetcode_elk-elasticsearch-1_1 bash
 REM docker container exec -it dev-leetcode_clickhouse-db_1 bash
+REM docker container exec -it dev-leetcode_mongo-db_1 bash
 
 REM docker container logs dev-leetcode_mysql-db_1
 REM docker container logs dev-leetcode_canal-server_1
