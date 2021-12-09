@@ -15,6 +15,36 @@ public class Solution0082_RemoveDuplicatesFromSortedListII {
 		}
 		
 		ListNode newHead = new ListNode(0, head);
+		int current = 0;
+		ListNode p = newHead;
+		
+		// 当p后面还至少有2个元素时
+		while (p.next != null && p.next.next != null) {
+			
+			if (p.next.val == p.next.next.val) {
+				// p后面的下一个元素和下下个元素不等，p.next这个元素要删除
+				current = p.next.val;
+				
+				while (p.next != null && p.next.val == current) {
+					// 删除等于current的节点
+					p.next = p.next.next;
+				}
+				
+			} else {
+				// p后面的下一个元素和下下元素不等，p可以向后移动
+				p = p.next;
+			}
+		}
+		
+		return newHead.next;
+    }
+	
+	public static ListNode deleteDuplicates2(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		
+		ListNode newHead = new ListNode(0, head);
 		
 		// 指向当前值前一个节点
 		ListNode left = newHead;
@@ -79,6 +109,16 @@ public class Solution0082_RemoveDuplicatesFromSortedListII {
 		 * 输出：[2,3]
 		 */
 		input = new int[]{1, 1, 1, 2, 3};
+		head = ListNode.buildList(input);
+		ListNode.print(head);
+		head = deleteDuplicates(head);
+		ListNode.print(head);
+		
+		/*
+		 * 输入：head = [1,1]
+		 * 输出：[]
+		 */
+		input = new int[]{1, 1};
 		head = ListNode.buildList(input);
 		ListNode.print(head);
 		head = deleteDuplicates(head);
