@@ -229,20 +229,27 @@ services:
     # volumes:
     #     - /Users/liuzhao/Downloads
     #   - $HOME/some_clickhouse_database:/var/lib/clickhouse
-  mongo-db:
-    image: mongo:latest
-    hostname: mongo-db
-    domainname: internal
-    environment:
-      - AUTH=yes
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
-    ports:
-      - 27017:27017
-    restart: unless-stopped
-    volumes:
-      - mongo_data:/data/db
-      - mongo_data:/var/log/mongo_datadb
+  # mongo-db:
+  #   image: mongo:latest
+  #   hostname: mongo-db
+  #   domainname: internal
+  #   environment:
+  #     - AUTH=yes
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=admin
+  #   ports:
+  #     - 27017:27017
+  #   restart: unless-stopped
+  #   volumes:
+  #     - mongo_data:/data/db
+  #     - mongo_data:/var/log/mongo_datadb
+  # gremlin-console:
+  #   image: tinkerpop/gremlin-console:latest
+  #   hostname: gremlin-console
+  #   domainname: internal
+  #   ports:
+  #     - 8182:8182
+  #   restart: unless-stopped
 ###############################################################################
 # Search
 # https://hub.docker.com/_/elasticsearch?tab=tags&page=1&ordering=last_updated
