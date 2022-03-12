@@ -18,7 +18,7 @@ public class ListNode {
 	}
 	
 	public static ListNode buildList(int[] values) {
-		ListNode head = new ListNode(0);		
+		ListNode head = new ListNode(0);
 		ListNode pNode = head;
 		
 		for (int i = 0; i < values.length; i++) {
