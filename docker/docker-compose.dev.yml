@@ -115,12 +115,12 @@ services:
       # - 11111:11111
     # restart: unless-stopped
   # zookeeper-1:
-    # image: wurstmeister/zookeeper:latest
-    # hostname: zookeeper-1
-    # domainname: internal
-    # ports:
-      # - 2181:2181
-    # restart: unless-stopped
+  #   image: wurstmeister/zookeeper:latest
+  #   hostname: zookeeper-1
+  #   domainname: internal
+  #   ports:
+  #     - 2181:2181
+  #   restart: unless-stopped
   # zipkin-1: # https://github.com/openzipkin/zipkin#quick-start
   #   image: openzipkin/zipkin-slim
   #   hostname: zipkin-1
