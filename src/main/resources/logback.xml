@@ -27,4 +27,9 @@
 		<appender-ref ref="CONSOLE" />
 		<!-- <appender-ref ref="FILE" />  -->
 	</root>
+
+	<logger name="org.apache.ibatis" level="INFO" />
+	<!-- 打开SQL语句日志 -->
+	<logger name="edgar.mybatis.guigu2022.mapper" level="DEBUG" />
+	<logger name="edgar.mybatis.guigu2022.generated.mapper" level="DEBUG" />
 </configuration>

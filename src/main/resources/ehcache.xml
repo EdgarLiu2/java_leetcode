@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://www.ehcache.org/ehcache.xsd">
+	
+    <!--
+       Read the Ehcache documentation for help on configuring this file.
+       The <defaultCache> configuration is used as the default for programmatically created caches.
+       <cache> entries will not inherit configuration from <defaultCache>.
+    -->
+    <defaultCache
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            maxEntriesLocalHeap="10000"
+            eternal="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            statistics="true"
+    />
+	
+
+</ehcache>

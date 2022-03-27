@@ -15,3 +15,10 @@ mvn archetype:generate -DgroupId=edgar.test -DartifactId=leetcode -DarchetypeArt
 
 # https://leetcode-cn.com/problemset/all/
 
+# Mybatis
+
+- [【尚硅谷】2022版MyBatis教程](https://www.bilibili.com/video/BV1VP4y1c7j7?spm_id_from=333.999.0.0)
+- [【尚硅谷】2022版MyBatisPlus教程](https://www.bilibili.com/video/BV12R4y157Be/?spm_id_from=autoNext)
+
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+

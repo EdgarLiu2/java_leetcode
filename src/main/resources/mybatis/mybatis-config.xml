@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="mybatis/database.properties"></properties>
+
+	<!-- 全局配置 -->
+	<settings>
+		<!-- 将数据库中user_id映射为Java中的userId -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 打开延迟加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+	</settings>
+
+	<!-- 类型别名 -->
+	<typeAliases>
+		<!-- <typeAlias type="edgar.mybatis.guigu2022.pojo.User" /> -->
+		<!-- 以包为单位，设置类型别名 -->
+		<package name="edgar.mybatis.guigu2022.pojo" />
+		<package name="edgar.mybatis.guigu2022.generated.pojo" />
+	</typeAliases>
+
+    <plugins>
+		<!-- 配置分页插件 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
+	<environments default="development">
+		<!-- 数据库环境 -->
+		<environment id="development">
+			<!-- JDBC: 手工管理事务 -->
+			<!-- MANAGED: 例如由spring管理 -->
+			<transactionManager type="JDBC" />
+
+			<!-- POOLED: 使用数据库连接池 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<!-- <mapper resource="mybatis/mappers/UserMapper.xml" />  -->
+
+		<!-- 以包的形式引入.xml，要求xml文件和Java文件的包名必须相同 -->
+		<package name="edgar.mybatis.guigu2022.mapper" />
+		<package name="edgar.mybatis.guigu2022.generated.mapper" />
+	</mappers>
+</configuration>

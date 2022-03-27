@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=UTF8&amp;autoReconnect=true" driverClass="com.mysql.cj.jdbc.Driver" password="123456" userId="root" />
+
+		<!-- JavaBean的生成策略 -->
+		<javaModelGenerator targetPackage="edgar.mybatis.guigu2022.generated.pojo" targetProject="./src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- SQL映射文件的生成策略 -->
+		<sqlMapGenerator targetPackage="edgar.mybatis.guigu2022.generated.mapper" targetProject="./src/main/resources">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</sqlMapGenerator>
+
+		<!-- Mapper接口的生成策略 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="edgar.mybatis.guigu2022.generated.mapper" targetProject="./src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaClientGenerator>
+
+		<!-- 逆向分析的表 -->
+		<table schema="mybatis" tableName="tbl_user" domainObjectName="User2"></table>
+		<table schema="mybatis" tableName="tbl_employee" domainObjectName="Employee2"></table>
+		<table schema="mybatis" tableName="tbl_department" domainObjectName="Department2"></table>
+	</context>
+</generatorConfiguration>

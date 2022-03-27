@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edgar.mybatis.guigu2022.mapper.DepartmentMapper">
+	<!-- 打开二级缓存 -->
+	<cache readOnly="true" />
+
+	<!-- int insertDepartment(Department department); -->
+	<!-- 自增主键id自动填充 -->
+	<insert id="insertDepartment" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_department values(null, #{name})
+	</insert>
+
+	<!-- Department getDepartmentById(@Param("id")Integer id); -->
+	<select id="getDepartmentById" resultType="Department">
+		select * from tbl_department where id = #{id}
+	</select>
+
+	<resultMap id="departmentEmployeeResultMap" type="Department">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<!-- collection property="employees" ofType="Employee">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+			<result property="age" column="age" />
+			<result property="sex" column="sex" />
+			<result property="email" column="email" />
+		</collection -->
+		<collection property="employees"
+			select="edgar.mybatis.guigu2022.mapper.EmployeeMapper.getEmployeesByDepartmentId"
+			column="id">
+		</collection>
+	</resultMap>
+
+	<!-- Department getDepartmentEmployeeById(@Param("id") Integer id); -->
+	<select id="getDepartmentEmployeeById" resultMap="departmentEmployeeResultMap">
+		select * from tbl_department where id = #{id}
+	</select>
+
+	<!-- List<Department> getAllDepartments(); -->
+	<select id="getAllDepartments" resultType="Department">
+		select * from tbl_department
+	</select>
+</mapper>

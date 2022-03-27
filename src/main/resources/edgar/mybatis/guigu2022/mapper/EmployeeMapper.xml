@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edgar.mybatis.guigu2022.mapper.EmployeeMapper">
+	<!-- 打开二级缓存 -->
+	<cache readOnly="true" />
+
+	<!-- int insertEmployee(Employee employee); -->
+	<!-- 自增主键id自动填充 -->
+	<insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_employee values(null, #{name}, #{age}, #{sex}, #{email}, #{department.id})
+	</insert>
+
+	<!-- int deletEmployeeById(@Param("id") Integer id); -->
+	<delete id="deletEmployeeById">
+		delete from tbl_employee where id = #{id}
+	</delete>
+	
+	<!-- Employee getEmployeeById(@Param("id")Integer id); -->
+	<select id="getEmployeeById" resultType="Employee">
+		select * from tbl_employee where id = #{id}
+	</select>
+
+	<!-- 解决字段名和属性不一致方法二：自定义类型映射，进行级联属性赋值 -->
+	<resultMap id="employeeDepartmentResultMap" type="Employee">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="age" column="age" />
+		<result property="sex" column="sex" />
+		<result property="email" column="email" />
+
+		<!-- 处理employee中的department属性 -->
+		<!-- <result property="department.id" column="dept_id" /> -->
+		<!-- <result property="department.name" column="dept_name" /> -->
+		<!-- association property="department" javaType="Department">
+			<id property="id" column="dept_id" />
+			<result property="name" column="dept_name" />
+		</association -->
+		<!-- 分开查询才能使用延迟加载功能，可通过fetchType="eager"关闭 -->
+		<association property="department"
+			select="edgar.mybatis.guigu2022.mapper.DepartmentMapper.getDepartmentById"
+			column="dept_id">
+		</association>
+	</resultMap>
+	<!-- Employee getEmployeeDepartmentById(@Param("id")Integer id); -->
+	<select id="getEmployeeDepartmentByIdOld" resultMap="employeeDepartmentResultMap">
+		select
+			emp.*,
+			dept.id dept_id, dept.name dept_name
+		from tbl_employee emp
+			left join tbl_department depton emp.dept_id = dept.id
+		where
+			emp.id = #{id}
+	</select>
+	<select id="getEmployeeDepartmentById" resultMap="employeeDepartmentResultMap">
+		select * from tbl_employee where id = #{id}
+	</select>
+
+	<!-- List<Employee> getAllEmployees(); -->
+	<!-- 解决字段名和属性不一致方法一：select id, emp_name as name, age, sex, email from tbl_employee -->
+	<select id="getAllEmployees" resultType="Employee">
+		select * from tbl_employee
+	</select>
+
+	<!-- List<Employee> getEmployeesByDepartmentId(@Param("deptId") Integer deptId); -->
+	<select id="getEmployeesByDepartmentId" resultType="Employee">
+		select * from tbl_employee where dept_id = #{deptId}
+	</select>
+</mapper>

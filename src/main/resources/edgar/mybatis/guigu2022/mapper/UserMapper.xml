@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edgar.mybatis.guigu2022.mapper.UserMapper">
+	<!-- 打开二级缓存 -->
+	<cache readOnly="true" type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<sql id="userColumns">id, username, password, age, sex, email</sql>
+
+	<!-- int insertUser(User user); -->
+	<!-- 自增主键id自动填充 -->
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_user values(null, #{username}, #{password}, #{age}, #{sex}, #{email})
+	</insert>
+
+	<!-- int batchInsertUsers(List<User> users); -->
+	<insert id="batchInsertUsers" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_user values
+		<foreach collection="users" item="user" separator=",">
+			(null, #{user.username}, #{user.password}, #{user.age}, #{user.sex}, #{user.email})
+		</foreach>
+	</insert>
+
+	<!-- int updateUser(User user); -->
+	<update id="updateUser">
+		update tbl_user set username = #{username}, password = #{password}, age = #{age}, sex = #{sex}, email = #{email}  where id = #{id}
+	</update>
+
+	<!-- int deleteUserByUsername(@Param("username") String username); -->
+	<delete id="deleteUserByUsername">
+		delete from tbl_user where username = #{username}
+	</delete>
+
+	<!-- int deleteUserById(@Param("id") Integer id); -->
+	<delete id="deleteUserById">
+		delete from tbl_user where id = #{id}
+	</delete>
+
+	<!-- int deleteUserByIds(@Param("ids") String ids); -->
+	<delete id="deleteUserByIds">
+		delete from tbl_user where id in (${ids})
+	</delete>
+
+	<!-- int deleteUserByIdArray(@Param("ids") Integer[] ids); -->
+	<delete id="deleteUserByIdArray">
+		delete from tbl_user where id in
+		<foreach collection="ids" item="id" separator="," open="(" close=")">#{id}</foreach>
+	</delete>
+
+	<!-- User getUserById(@Param("id")Integer id); -->
+	<select id="getUserById" resultType="User">
+		select <include refid="userColumns" /> from tbl_user where id = #{id}
+	</select>
+
+	<!-- List<User> getUsersByUsername(@Param("username") String username); -->
+	<select id="getUsersByUsername" resultType="User">
+		select <include refid="userColumns" /> from tbl_user where username = #{username}
+	</select>
+
+	<!-- List<User> getUsersByQuery(@Param("userQuery") UserQuery userQuery); -->
+	<select id="getUsersByQuery" resultType="User">
+		select <include refid="userColumns" /> from tbl_user
+		<where>
+			<if test="nameStartwith != null and nameStartwith != ''">
+				and username like #{nameStartwith}"%"
+			</if>
+			<if test="ageMin != 0">
+				and age &gt;= #{ageMin}
+			</if>
+			<if test="ageMax != 0">
+				and age &lt;= #{ageMax}
+			</if>
+		</where>
+	</select>
+
+	<select id="getAllUsers" resultType="User">
+		select <include refid="userColumns" /> from tbl_user
+	</select>
+
+	<!-- Map<Integer, User> getAllUsersToMap(); -->
+	<select id="getAllUsersToMap" resultType="User">
+		select <include refid="userColumns" /> from tbl_user
+	</select>
+
+	<!-- List<User> getUsersByEmailLike(@Param("email") String email); -->
+	<select id="getUsersByEmailLike" resultType="User">
+		select <include refid="userColumns" /> from tbl_user where email like "%"#{email}"%"
+	</select>
+
+	<!-- Integer getUserCount(); -->
+	<select id="getUserCount" resultType="Integer">
+		select count(*) from tbl_user
+	</select>
+
+	<!-- User checkLogin(@Param("username") String username, @Param("password") String password); -->
+	<select id="checkLogin" resultType="User">
+		select <include refid="userColumns" /> from tbl_user where username = #{username} and password = #{password}
+	</select>
+</mapper>
