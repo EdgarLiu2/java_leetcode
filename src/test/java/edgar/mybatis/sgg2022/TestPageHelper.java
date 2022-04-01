@@ -23,6 +23,7 @@ public class TestPageHelper extends TestBase {
 
 	@Test
 	public void testDemo1() {
+		// 第二页，每页4条数据
 		PageHelper.startPage(2, 4);
 		List<User2> users = userMBGDao.selectByExample(null);
 		assertNotNull("UserMBGMapper.selectByExample() fail", users);

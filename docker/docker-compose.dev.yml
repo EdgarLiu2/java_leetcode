@@ -182,11 +182,11 @@ services:
     ports:
       - 6379:6379
     restart: unless-stopped
-    healthcheck:
-      test: redis-cli -h localhost ping
-      interval: 30s
-      timeout: 10s
-      retries: 5
+    # healthcheck:
+    #   test: redis-cli -h localhost ping
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
     volumes:
       - redis_data:/data
   mysql-db:
@@ -201,12 +201,11 @@ services:
     ports:
       - 3306:3306
     restart: unless-stopped
-    healthcheck:
-      #test: /usr/bin/mysqladmin ping -h localhost --user=test --password=test
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--user=test", "--password=test"]
-      interval: 5s
-      timeout: 2s
-      retries: 3
+    # healthcheck:
+    #   test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--user=test", "--password=test"]
+    #   interval: 5s
+    #   timeout: 2s
+    #   retries: 3
   #   volumes:
   #     - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
   #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"

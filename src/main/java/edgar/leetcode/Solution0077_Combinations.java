@@ -33,7 +33,7 @@ public class Solution0077_Combinations {
 		
 		// 递归终止条件，当前路径中已经有了k个元素
 		if (path.size() == k) {
-			result.add(new ArrayList(path));
+			result.add(new ArrayList<>(path));
 			return;
 		}
 		

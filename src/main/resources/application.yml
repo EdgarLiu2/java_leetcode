@@ -1,0 +1,56 @@
+server:
+   port: 8090
+
+mybatis-plus:
+   global-config:
+      db-config:
+         # 表前缀
+         table-prefix: tbl_
+         # 主键生成策略，默认雪花算法
+         #id-type: auto
+   configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+   mapper-locations: classpath:edgar/mybatis/mybatisplus/mapper/**/*.xml
+   # 配置类型别名
+   type-aliases-package: edgar.mybatis.mybatisplus.pojo
+   # 配置通用枚举的包
+   type-enums-package: edgar.mybatis.mybatisplus.enums
+
+spring:
+   application:
+      name: springboot-mybatis-plus-demo
+   datasource:
+      # driverClassName: com.mysql.cj.jdbc.Driver
+      # url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=GMT
+      # username: root
+      # password: 123456
+      # ## 数据库连接池
+      # type: com.zaxxer.hikari.HikariDataSource
+      # hikari:
+      #    auto-commit: true
+      #    minimum-idle: 2
+      #    idle-timeout: 6000
+      #    connection-timeout: 3000
+      #    max-lifetime: 180000
+      #    pool-name: DatebookHikariCP
+      #    maximum-pool-size: 5
+    # https://github.com/baomidou/dynamic-datasource-spring-boot-starter
+    dynamic:
+      primary: master # 设置默认的数据源或者数据源组，默认值即为master
+      strict: false # 严格匹配数据源，默认false. true未匹配到指定数据源时抛异常，false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=GMT
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave_1:
+          url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=GMT
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave_2:
+          url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=GMT
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver

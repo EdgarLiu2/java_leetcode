@@ -32,4 +32,5 @@
 	<!-- 打开SQL语句日志 -->
 	<logger name="edgar.mybatis.guigu2022.mapper" level="DEBUG" />
 	<logger name="edgar.mybatis.guigu2022.generated.mapper" level="DEBUG" />
+	<!-- logger name="edgar.mybatis.mybatisplus.mapper" level="DEBUG" / -->
 </configuration>

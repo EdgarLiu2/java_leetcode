@@ -7,8 +7,11 @@ docker-compose -p dev-leetcode -f docker-compose.dev.yml up sonarqube -d
 docker-compose -p dev-kafka -f kafka.cluster.yml down --remove-orphans
 docker-compose -p dev-kafka -f kafka.cluster.yml up -d
 
+docker events
 docker image prune -a
 docker volume prune
+docker system prune --volumes
+
 
 REM docker container exec -it dev-leetcode_mysql-db_1 bash
 mysql -uroot -p123456
@@ -29,6 +32,7 @@ REM docker container exec -it dev-leetcode_clickhouse-db_1 bash
 REM docker container exec -it dev-leetcode_mongo-db_1 bash
 REM docker container exec -it dev-leetcode_gremlin-console_1 bash
 
+REM docker container logs dev-leetcode_redis-db_1
 REM docker container logs dev-leetcode_mysql-db_1
 REM docker container logs dev-leetcode_canal-server_1
 REM docker container logs dev-leetcode_rabbitmq_1

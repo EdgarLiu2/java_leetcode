@@ -4,6 +4,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
 
 	<groupId>edgar.test</groupId>
 	<artifactId>leetcode</artifactId>
@@ -16,10 +23,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>15</java.version>
 		<elasticsearch.version>7.14.1</elasticsearch.version>
 		<canal.version>1.1.5</canal.version>
 		<mybatis.version>3.5.9</mybatis.version>
+		<mybatis.plus.version>3.5.1</mybatis.plus.version>
 		<jdbc.version>8.0.28</jdbc.version>
 	</properties>
 
@@ -127,6 +135,47 @@
 		    <artifactId>pagehelper</artifactId>
 		    <version>5.3.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+		<dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatis-plus-boot-starter</artifactId>
+		    <version>${mybatis.plus.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-generator -->
+		<dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatis-plus-generator</artifactId>
+		    <version>${mybatis.plus.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
+		<dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+		    <version>${mybatis.plus.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+		<dependency>
+			<!-- Starter for building web, including RESTful, applications using Spring
+				MVC. Uses Tomcat as the default embedded container -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-freemarker -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<!-- 简化实体类开发 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <!-- version>1.18.22</version -->
+		    <scope>provided</scope>
+		    <optional>true</optional>
+		</dependency>
+
 
 
 
@@ -144,6 +193,17 @@
 		    <artifactId>datafaker</artifactId>
 		    <version>1.2.0</version>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
 	</dependencies>
 
 	<build>

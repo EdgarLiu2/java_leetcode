@@ -15,6 +15,21 @@ CREATE TABLE IF NOT EXISTS `mybatis`.`tbl_user`
     ENGINE = InnoDB
     DEFAULT CHARSET = utf8;
 
+CREATE TABLE IF NOT EXISTS `mybatis`.`tbl_user3`
+(
+    `id`       BIGINT UNSIGNED,
+    `username` VARCHAR(20) NOT NULL,
+    `password` VARCHAR(20),
+    `age`      TINYINT,
+    `sex`      TINYINT COMMENT '0：未知，1：男，2：女',
+    `email`    VARCHAR(50),
+    `version`  INT UNSIGNED DEFAULT 0 COMMENT '乐观锁',
+    PRIMARY KEY (`id`),
+    INDEX `idx_username_password` (`username`, `password`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8;
+
 EXPLAIN
 select *
 from tbl_user
@@ -46,6 +61,18 @@ CREATE TABLE IF NOT EXISTS `mybatis`.`tbl_department`
     `name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`),
     INDEX `idx_name` (`name`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8;
+
+DROP TABLE `mybatis`.`tbl_product`;
+CREATE TABLE IF NOT EXISTS `mybatis`.`tbl_product`
+(
+    `id`      BIGINT UNSIGNED,
+    `name`    VARCHAR(50) NOT NULL,
+    `price`   INT          DEFAULT 0 COMMENT '商品价格',
+    `version` INT UNSIGNED DEFAULT 0 COMMENT '乐观锁',
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARSET = utf8;
