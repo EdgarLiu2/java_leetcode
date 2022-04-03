@@ -296,4 +296,4 @@ services:
   #     retries: 5
 volumes:
   redis_data:
-  mongo_data:
+  # mongo_data:
