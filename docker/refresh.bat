@@ -77,10 +77,10 @@ apt-get -y install iputils-ping
 	<url>https://maven.aliyun.com/repository/central</url>
 </mirror>
 
-# Docker mirror: https://r3cphckj.mirror.aliyuncs.com
+REM Docker mirror: https://r3cphckj.mirror.aliyuncs.com
 
 
-# Swarm
+REM Swarm
 
 docker swarm init --advertise-addr=192.168.1.29
 docker swarm join --token

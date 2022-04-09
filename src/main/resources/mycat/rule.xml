@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mycat:rule SYSTEM "rule.dtd">
+<mycat:rule xmlns:mycat="http://io.mycat/">
+    <!-- name必须唯一 -->
+    <!-- 对customer_id列，对4简单取模 -->
+    <tableRule name="mod-4_customer_id">
+        <rule>
+            <columns>customer_id</columns>
+            <algorithm>mod-long-4</algorithm>
+        </rule>
+    </tableRule>
+    <function name="mod-long-4" class="org.opencloudb.route.function.PartitionByMod">
+        <!-- 分片算法，唯一；JAVA类路径，1.6是io.mycat.route.function.PartitionByMod -->
+        <property name="count">4</property>
+    </function>
+
+
+    <!-- 对id列，hash后对4取模 -->
+    <tableRule name="hash-mod-4_id">
+        <rule>
+            <columns>id</columns>
+            <algorithm>hash-mod-4</algorithm>
+        </rule>
+    </tableRule>
+    <function name="hash-mod-4" class="org.opencloudb.route.function.PartitionByHashMod">
+        <!-- 分片算法，唯一；JAVA类路径，1.6是io.mycat.route.function.PartitionByHashMod -->
+        <property name="count">4</property>
+        <!-- 不同分片算法属性不一样，这里是将数据分成4份 -->
+    </function>
+
+
+    <!-- 对id列，hash枚举分片 -->
+    <tableRule name="int-file-map_id">
+        <rule>
+            <columns>id</columns>
+            <algorithm>int-file-map</algorithm>
+        </rule>
+    </tableRule>
+    <function name="int-file-map" class="org.opencloudb.route.function.PartitionByFileMap">
+        <property name="mapFile">partition-hash-int.txt</property>
+        <!-- 0:int, 1:string -->
+        <property name="type">0</property>
+        <property name="defaultNode">0</property>
+    </function>
+
+
+    <!-- 对customer_name列，进行字符串范围取模 -->
+    <tableRule name="sharding-by-prefix-pattern_customer_name">
+        <rule>
+            <columns>customer_name</columns>
+            <algorithm>sharding-by-prefix-pattern</algorithm>
+        </rule>
+    </tableRule>
+    <function name="sharding-by-prefix-pattern" class="org.opencloudb.route.function.PartitionByPrefixPattern">
+    	<!-- 求模基数 -->
+        <property name="patternValue">128</property>
+        <!-- 截取前缀长度 -->
+        <property name="prefixLength">2</property>
+        <property name="mapFile">partition-prefix-pattern.txt</property>
+    </function>
+</mycat:rule>
