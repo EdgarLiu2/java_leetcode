@@ -1,5 +1,8 @@
 package edgar.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TreeNode {
 	public int val;
 	public TreeNode left;
@@ -20,5 +23,28 @@ public class TreeNode {
 	
 	public static TreeNode buildTree(int[] values) {
 		return new TreeNode();
+	}
+	
+	public List<Integer> inorderTraversal() {
+		List<Integer> result = new ArrayList<>();
+		doInorderTraversal(this, result);
+		
+		return result;
+	}
+	
+	private static void doInorderTraversal(TreeNode root, List<Integer> list) {
+		if (root == null) {
+			return;
+		}
+		
+		if (root.left != null) {
+			doInorderTraversal(root.left, list);
+		}
+		
+		list.add(root.val);
+		
+		if (root.right != null) {
+			doInorderTraversal(root.right, list);
+		}
 	}
 }
