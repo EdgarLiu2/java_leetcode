@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveAction;
+import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -93,12 +94,30 @@ public class ExecutorServiceDemo {
 		
 		SleepUtil.secondSleep(1);
 	}
+	
+	static void forkJoinPoolWithResult() {
+		int[] nums = new int[1_000_000];
+		Random r = new Random();
+		for (int i = 0; i < nums.length; i++) {
+			nums[i] = r.nextInt(100);
+		}
+		
+		ForkJoinPool fjp = new ForkJoinPool();
+		ForkJoinPoolWithResult task = new ForkJoinPoolWithResult(0, nums.length, nums);
+		fjp.execute(task);
+		// 统计最后的结果
+		long result = task.join();
+		System.out.println("ForkJoinPoolWithResult = " + result);
+		
+		SleepUtil.secondSleep(1);
+	}
 
 	public static void main(String[] args) {
-//		fixedThreadPoolDemo();
-//		scheduledThreadPoolDemo();
-//		workStealingPoolDemo();
+		fixedThreadPoolDemo();
+		scheduledThreadPoolDemo();
+		workStealingPoolDemo();
 		forkJoinPoolWithoutResult();
+		forkJoinPoolWithResult();
 	}
 
 }
@@ -211,6 +230,52 @@ class ForkJoinPoolWithoutResult extends RecursiveAction {
 			subTask1.fork();
 			subTask2.fork();
 		}
+	}
+	
+}
+
+class ForkJoinPoolWithResult extends RecursiveTask<Long> {
+
+public final static int MAX_NUM = 50000;
+	
+	private int start;
+	private int end;
+	private int[] nums;
+	
+	public ForkJoinPoolWithResult(int start, int end, int[] nums) {
+		this.start = start;
+		this.end = end;
+		this.nums = nums;
+	}
+	
+	@Override
+	protected Long compute() {
+		// 当计算量小于MAX_NUM时计算，否则进行拆分
+		if (end - start <= MAX_NUM) {
+			
+			long sum = 0L;
+			for (int i = start; i < end; i++) {
+				sum += nums[i];
+			}
+			// Java8
+			int newSum = IntStream.range(start, end).map(i -> nums[i]).sum();
+			
+			System.out.printf("[%s] %s From=%d To=%d Sum=%d StreamSum=%d\n", 
+					TimeUtil.getDefaultTimeString(), Thread.currentThread().getName(),
+					start, end, sum, newSum);
+			
+			return sum;
+		} else {
+			int middle = start + (end - start) / 2;
+			
+			ForkJoinPoolWithResult subTask1 = new ForkJoinPoolWithResult(start, middle, nums);
+			ForkJoinPoolWithResult subTask2 = new ForkJoinPoolWithResult(middle, end, nums);
+			subTask1.fork();
+			subTask2.fork();
+			
+			return subTask1.join() + subTask2.join();
+		}
+
 	}
 	
 }
