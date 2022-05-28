@@ -236,7 +236,9 @@ class ForkJoinPoolWithoutResult extends RecursiveAction {
 
 class ForkJoinPoolWithResult extends RecursiveTask<Long> {
 
-public final static int MAX_NUM = 50000;
+	private static final long serialVersionUID = 5810232474884299784L;
+
+	public final static int MAX_NUM = 50000;
 	
 	private int start;
 	private int end;
