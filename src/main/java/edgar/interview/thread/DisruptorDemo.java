@@ -177,9 +177,9 @@ public class DisruptorDemo {
 	}
 
 	public static void main(String[] args) {
-//		disruptorDemo1();
-//		disruptorDemo2();
-//		disruptorDemo3();
+		disruptorDemo1();
+		disruptorDemo2();
+		disruptorDemo3();
 	}
 
 }
