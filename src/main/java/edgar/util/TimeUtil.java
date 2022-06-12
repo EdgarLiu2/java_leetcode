@@ -13,5 +13,8 @@ public class TimeUtil {
 		Date sysdate = Calendar.getInstance().getTime();
 		return sdf.format(sysdate);
 	}
-	
+
+	public static long getTimeStamp() {
+		return Calendar.getInstance().getTime().getTime();
+	}
 }
