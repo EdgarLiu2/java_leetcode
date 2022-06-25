@@ -70,7 +70,7 @@ public class DisruptorDemo {
 		RingBuffer<LongEvent> ringBuffer = disruptor.start();
 		
 		// EventTranslator 无参数
-		EventTranslator<LongEvent> translator1 = new EventTranslator<>() {
+		EventTranslator<LongEvent> translator1 = new EventTranslator<LongEvent>() {
 
 			@Override
 			public void translateTo(LongEvent event, long sequence) {

@@ -2,6 +2,7 @@ package edgar.leetcode;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 105. 从前序与中序遍历序列构造二叉树
@@ -15,13 +16,13 @@ public class Solution0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
             return null;
         }
 
-        var empty = new int[]{-1};
+        int[] empty = new int[]{-1};
         if (Arrays.equals(preorder, empty) && Arrays.equals(inorder, empty)) {
             return new TreeNode(-1);
         }
 
         // 基于中序变量构造一个快速查询表
-        var inMap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> inMap = new HashMap<Integer, Integer>();
         for (int i = 0; i < inorder.length; i++) {
             inMap.put(inorder[i], i);
         }
@@ -29,14 +30,14 @@ public class Solution0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
         return buildTree(preorder, 0, preorder.length - 1, inMap, inorder, 0, inorder.length - 1);
     }
 
-    private static TreeNode buildTree(int[] preorder, int preLeft, int preRight, HashMap<Integer, Integer> inMap, int[] inorder, int inLeft, int inRight) {
+    private static TreeNode buildTree(int[] preorder, int preLeft, int preRight, Map<Integer, Integer> inMap, int[] inorder, int inLeft, int inRight) {
         if (preLeft > preRight || inLeft > inRight) {
             return null;
         }
 
-        var rootValue = preorder[preLeft];
-        var root = new TreeNode(rootValue);
-        var pIndex = inMap.get(rootValue);
+        int rootValue = preorder[preLeft];
+        TreeNode root = new TreeNode(rootValue);
+        int pIndex = inMap.get(rootValue);
 
         /*
             前序遍历：root, [preLeft + 1, ], [, preRight]
