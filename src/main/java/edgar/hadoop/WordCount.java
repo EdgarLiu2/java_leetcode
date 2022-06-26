@@ -1,4 +1,4 @@
-package edgar.try_new.hadoop;
+package edgar.hadoop;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -18,8 +18,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
  * mvn package -DskipTests
- * hadoop jar ~/workspace/GitHub/java_leetcode/target/leetcode-1.0-SNAPSHOT.jar edgar.try_new.hadoop.WordCount /Users/liuzhao/Desktop/Bytedance/workspace/hadoop/hadoop_test/wordcount/input /Users/liuzhao/Desktop/Bytedance/workspace/hadoop/hadoop_test/wordcount/output
- * hadoop jar ~/workspace/GitHub/java_leetcode/target/leetcode-1.0-SNAPSHOT.jar edgar.try_new.hadoop.WordCount /test/wordcount/input /test/wordcount/output
+ * hadoop jar ~/workspace/GitHub/java_leetcode/target/leetcode-1.0-SNAPSHOT.jar edgar.hadoop.WordCount /Users/liuzhao/Desktop/Bytedance/workspace/hadoop/hadoop_test/wordcount/input /Users/liuzhao/Desktop/Bytedance/workspace/hadoop/hadoop_test/wordcount/output
+ * hadoop jar ~/workspace/GitHub/java_leetcode/target/leetcode-1.0-SNAPSHOT.jar edgar.hadoop.WordCount /test/wordcount/input /test/wordcount/output
  *
  * Created by liuzhao on 2022/6/19
  */

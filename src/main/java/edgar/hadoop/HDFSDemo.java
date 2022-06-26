@@ -1,4 +1,4 @@
-package edgar.try_new.hadoop;
+package edgar.hadoop;
 
 import edgar.util.HDFSUtil;
 import edgar.util.TimeUtil;
