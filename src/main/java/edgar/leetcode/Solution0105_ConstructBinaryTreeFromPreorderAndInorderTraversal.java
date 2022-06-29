@@ -22,7 +22,7 @@ public class Solution0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
         }
 
         // 基于中序变量构造一个快速查询表
-        Map<Integer, Integer> inMap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> inMap = new HashMap<>();
         for (int i = 0; i < inorder.length; i++) {
             inMap.put(inorder[i], i);
         }
@@ -40,7 +40,7 @@ public class Solution0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
         int pIndex = inMap.get(rootValue);
 
         /*
-            前序遍历：root, [preLeft + 1, ], [, preRight]
+            前序遍历：root, [preLeft + 1, pIndex + preLeft - inLeft], [pIndex + preLeft - inLeft + 1, preRight]
             中序遍历：[inLeft, pIndex - 1], pIndex, [pIndex + 1, inRight]
          */
         // 左子树
