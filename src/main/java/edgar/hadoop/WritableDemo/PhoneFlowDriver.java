@@ -35,6 +35,11 @@ public class PhoneFlowDriver {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(PhoneFlowBean.class);
 
+        // 设置自定义分区类
+        job.setPartitionerClass(PhonePartitioner.class);
+        // 设置ReduceTask的数目，默认为1
+        job.setNumReduceTasks(5);
+
         // 6. 指定Job的输入文件目录
         FileInputFormat.addInputPath(job, new Path(args[0]));
 
