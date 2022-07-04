@@ -30,7 +30,6 @@
 		<mybatis.version>3.5.9</mybatis.version>
 		<mybatis.plus.version>3.5.1</mybatis.plus.version>
 		<jdbc.version>8.0.28</jdbc.version>
-		<hadoop.version>3.3.3</hadoop.version>
 	</properties>
 
 	<dependencies>
@@ -177,22 +176,6 @@
 		    <scope>provided</scope>
 		    <optional>true</optional>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>${hadoop.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.36</version>
-			<type>pom</type>
-			<scope>test</scope>
-		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
