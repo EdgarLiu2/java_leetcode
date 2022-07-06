@@ -30,6 +30,7 @@
 		<mybatis.version>3.5.9</mybatis.version>
 		<mybatis.plus.version>3.5.1</mybatis.plus.version>
 		<jdbc.version>8.0.28</jdbc.version>
+		<netty.version>4.1.78.Final</netty.version>
 	</properties>
 
 	<dependencies>
@@ -176,6 +177,13 @@
 		    <scope>provided</scope>
 		    <optional>true</optional>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${netty.version}</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
