@@ -32,9 +32,12 @@ public class NettyServer {
         // workerGroup负责客户端业务逻辑处理
         EventLoopGroup workerGroup = new NioEventLoopGroup(8);
         try {
+            // Netty服务端对象
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup) // 绑定两个线程池
-                    .channel(NioServerSocketChannel.class)
+                    .channel(NioServerSocketChannel.class)  // 服务端通道的实现类
+                    .option(ChannelOption.SO_BACKLOG, 1024)    // server端连接队列大小
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
@@ -43,9 +46,9 @@ public class NettyServer {
                                     new ResponseDataEncoder(),
                                     new ProcessingHandler());
                         }
-                    }).option(ChannelOption.SO_BACKLOG, 128)    // server端连接队列大小
-                    .childOption(ChannelOption.SO_KEEPALIVE, true);
+                    });
 
+            // 启动服务器，绑定监听端口
             ChannelFuture f = bootstrap.bind(port).sync();
             logger.info("Netty Server is started");
             f.channel().closeFuture().sync();
