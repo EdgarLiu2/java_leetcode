@@ -40,7 +40,7 @@ public class NettyServer {
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch) throws Exception {
+                        public void initChannel(SocketChannel ch) throws Exception {    // 创建通道初始化对象
                             // define inbound and outbound handlers that will process requests and output in the correct order
                             ch.pipeline().addLast(new RequestDecoder(),
                                     new ResponseDataEncoder(),
