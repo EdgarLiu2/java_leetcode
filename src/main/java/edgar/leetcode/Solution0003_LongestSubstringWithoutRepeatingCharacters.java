@@ -1,7 +1,9 @@
 package edgar.leetcode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -12,8 +14,32 @@ import java.util.Map;
  *
  */
 public class Solution0003_LongestSubstringWithoutRepeatingCharacters {
-    
-    public static int lengthOfLongestSubstring(String s) {
+
+	public static int lengthOfLongestSubstring(String s) {
+		int maxLength = 0;
+		char[] charArray = s.toCharArray();
+		Set<Character> chars = new HashSet<>();
+		// 向右扫描的指针
+		int rk = 0;
+
+		for (int i = 0; i < s.length(); i++) {
+			// 先从集合移除i-1的元素
+			if (i != 0) {
+				chars.remove(charArray[i-1]);
+			}
+
+			while (rk < s.length() && !chars.contains(charArray[rk])) {
+				chars.add(charArray[rk]);
+				rk++;
+			}
+
+			maxLength = Math.max(maxLength, rk - i);
+		}
+
+		return maxLength;
+	}
+
+    public static int lengthOfLongestSubstring2(String s) {
         int maxLength = 0;
         int j = 0;
         int strLength = s.length();
@@ -47,8 +73,9 @@ public class Solution0003_LongestSubstringWithoutRepeatingCharacters {
 		 * 
 		 */
 		String[] inputs = new String[] {"abcabcbb", "bbbbb", "pwwkew", "abba", " "};
-		for(String str : inputs) {
-			System.out.printf("%s: %d\n", str, lengthOfLongestSubstring(str));
+		int[] expected = new int[] {3, 1, 3, 2, 1};
+		for (int i = 0; i < inputs.length; i++) {
+			assert expected[i] == lengthOfLongestSubstring(inputs[i]);
 		}
 	}
 
