@@ -24,7 +24,11 @@ public class TreeNode {
 	public static TreeNode buildTree(int[] values) {
 		return new TreeNode();
 	}
-	
+
+	/**
+	 * 中序遍历
+	 * @return List<Integer>
+	 */
 	public List<Integer> inorderTraversal() {
 		List<Integer> result = new ArrayList<>();
 		doInorderTraversal(this, result);
@@ -36,12 +40,12 @@ public class TreeNode {
 		if (root == null) {
 			return;
 		}
-		
+
+		list.add(root.val);
+
 		if (root.left != null) {
 			doInorderTraversal(root.left, list);
 		}
-		
-		list.add(root.val);
 		
 		if (root.right != null) {
 			doInorderTraversal(root.right, list);
