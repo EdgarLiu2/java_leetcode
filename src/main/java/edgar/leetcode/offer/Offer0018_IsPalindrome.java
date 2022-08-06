@@ -13,7 +13,7 @@ public class Offer0018_IsPalindrome {
             return true;
         }
 
-        // 去掉原始字符串中的特殊字符，并转成想小写
+        // 去掉原始字符串中的特殊字符，并转成小写
         StringBuilder builder = new StringBuilder();
         for (char c : s.toCharArray()) {
             if (Character.isLetterOrDigit(c)) {
