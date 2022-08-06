@@ -83,7 +83,7 @@ public class Solution0109_ConvertSortedListToBinarySearchTree {
         input = new int[] {-10,-3,0,5,9};
         head = ListNode.buildList(input);
         result = sortedListToBST(head);
-        integers = result.inorderTraversal();
+        integers = result.preorderTraversal();
         integers.forEach(t -> System.out.print(t + " -> "));
 
         /*

@@ -41,12 +41,39 @@ public class TreeNode {
 			return;
 		}
 
+		if (root.left != null) {
+			doInorderTraversal(root.left, list);
+		}
+
+		list.add(root.val);
+		
+		if (root.right != null) {
+			doInorderTraversal(root.right, list);
+		}
+	}
+
+	/**
+	 * 前序遍历
+	 * @return List<Integer>
+	 */
+	public List<Integer> preorderTraversal() {
+		List<Integer> result = new ArrayList<>();
+		doPreorderTraversal(this, result);
+
+		return result;
+	}
+
+	private static void doPreorderTraversal(TreeNode root, List<Integer> list) {
+		if (root == null) {
+			return;
+		}
+
 		list.add(root.val);
 
 		if (root.left != null) {
 			doInorderTraversal(root.left, list);
 		}
-		
+
 		if (root.right != null) {
 			doInorderTraversal(root.right, list);
 		}
