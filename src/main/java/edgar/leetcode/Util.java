@@ -14,20 +14,36 @@ public class Util {
 			builder.append("\n");
 		}
 		
-		System.out.println(builder.toString());
+		System.out.println(builder);
+	}
+
+	public static void printTwoDimArray(boolean[][] arrays) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(String.format("rows: %d, cols: %d\n", arrays.length, arrays[0].length));
+
+		for(int row = 0; row < arrays.length; row++) {
+			for(int col = 0; col < arrays[0].length; col++) {
+				boolean b = arrays[row][col];
+				builder.append(String.format("%b ", b));
+			}
+
+			builder.append("\n");
+		}
+
+		System.out.println(builder);
 	}
 	
 	public static void printOneDimIntArray(int[] nums, int len) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < len; i++) {
-			buf.append(nums[i] + " ");
+			buf.append(nums[i]).append(" ");
 		}
 		
-		System.out.println(buf.toString());
+		System.out.println(buf);
 	}
 	
 	public static void printTwoDimIntArray(int[][] nums) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		
 		for (int i = 0; i < nums.length; i++) {
 			for (int j = 0; j < nums[0].length; j++) {
@@ -37,6 +53,6 @@ public class Util {
 			buf.append("\n");
 		}
 		
-		System.out.println(buf.toString());
+		System.out.println(buf);
 	}
 }
