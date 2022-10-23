@@ -30,7 +30,7 @@ public class MybatisPlusGenerator {
 	    .packageConfig(builder -> {
 	        builder.parent("edgar.mybatis.mybatisplus") // 设置父包名
 	            .moduleName("generated") // 设置父包模块名
-	            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, MAPPER_FOLDER)); // 设置mapperXml生成路径
+	            .pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_FOLDER)); // 设置mapperXml生成路径
 	    })
 	    .strategyConfig(builder -> {
 	        builder.addInclude("tbl_user3") // 设置需要生成的表名
