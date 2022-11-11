@@ -20,7 +20,7 @@ services:
     # ports:
       # - 9000:9000
 ###############################################################################
-# Middleware
+# Configuration Center
   # etcd-0:
   #     image: quay.io/coreos/etcd:latest
   #     hostname: etcd-0
@@ -96,6 +96,15 @@ services:
       # interval: 30s
       # timeout: 10s
       # retries: 5
+  # zookeeper-1:
+  #   image: wurstmeister/zookeeper:latest
+  #   hostname: zookeeper-1
+  #   domainname: internal
+  #   ports:
+  #     - 2181:2181
+  #   restart: unless-stopped
+###############################################################################
+# Middleware
   # canal-server:
     # image: canal/canal-server:v1.1.4
     # hostname: canal-server
@@ -114,13 +123,6 @@ services:
     # ports:
       # - 11111:11111
     # restart: unless-stopped
-  # zookeeper-1:
-  #   image: wurstmeister/zookeeper:latest
-  #   hostname: zookeeper-1
-  #   domainname: internal
-  #   ports:
-  #     - 2181:2181
-  #   restart: unless-stopped
   # zipkin-1: # https://github.com/openzipkin/zipkin#quick-start
   #   image: openzipkin/zipkin-slim
   #   hostname: zipkin-1
@@ -136,6 +138,18 @@ services:
   #     - 8500:8500
   #   command: "agent -server -bootstrap -ui -client 0.0.0.0"
   #   restart: unless-stopped
+  # spring-boot-admin:
+  #   image: slydeveloper/spring-boot-admin:latest
+  #   hostname: spring-boot-admin
+  #   domainname: internal
+  #   ports:
+  #     - 1111:1111
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: "curl -sS http://localhost:1111/health"
+  #     interval: 30s
+  #     timeout: 60s
+  #     retries: 120
 ###############################################################################
 # MessageQueue
   # rabbitmq:
