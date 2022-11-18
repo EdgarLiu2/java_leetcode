@@ -15,7 +15,7 @@ public class Solution0139_WordBreak {
 
         // 定义 dp[i]表示字符串 s 前 i 个字符组成的字符串 s[0..i−1] 是否能被空格拆分成若干个字典中出现的单词
         boolean[] dp = new boolean[s.length() + 1];
-        // 初始化 dp[0]=true dp[0]=True，空字符可以被表示
+        // 初始化 dp[0]=true，空字符可以被表示
         dp[0] = true;
 
         for (int i = 1; i <= s.length(); i++) {
@@ -29,7 +29,6 @@ public class Solution0139_WordBreak {
                 }
             }
         }
-
 
         return dp[s.length()];
     }
