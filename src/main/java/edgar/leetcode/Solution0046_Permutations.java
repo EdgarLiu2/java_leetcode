@@ -1,28 +1,21 @@
 package edgar.leetcode;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
- * 46. 全排列
- * https://leetcode-cn.com/problems/permutations/
- * 
+ * <a href="https://leetcode-cn.com/problems/permutations/">46. 全排列</a>
+ *
  * @author liuzhao
  *
  */
 public class Solution0046_Permutations {
 	
 	public static List<List<Integer>> permute(int[] nums) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<List<Integer>> result = new ArrayList<>();
 		if (nums.length == 0) {
 			return result;
 		} else if (nums.length == 1) {
-			List<Integer> r = Arrays.asList(nums[0]);
+			List<Integer> r = List.of(nums[0]);
 			result.add(r);
 			return result;
 		}
@@ -57,21 +50,21 @@ public class Solution0046_Permutations {
 
 	public static List<List<Integer>> permute2(int[] nums) {
 		
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<List<Integer>> result = new ArrayList<>();
 		if (nums.length == 0) {
 			return result;
 		} else if (nums.length == 1) {
-			List<Integer> r = Arrays.asList(nums[0]);
+			List<Integer> r = List.of(nums[0]);
 			result.add(r);
 			return result;
 		}
 		
 		Set<Integer> set = new HashSet<>();
-		for (int i = 0; i < nums.length; i++ ) {
-			set.add(nums[i]);
+		for (int num : nums) {
+			set.add(num);
 		}
 		
-		dfs(set, new ArrayList<Integer>(), result);
+		dfs(set, new ArrayList<>(), result);
 		
 		return result;
 	}

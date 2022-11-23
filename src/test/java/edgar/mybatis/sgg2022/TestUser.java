@@ -1,6 +1,5 @@
 package edgar.mybatis.sgg2022;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +63,7 @@ public class TestUser extends TestBase {
 	
 	@Test
 	public void testBatchInsertUsers() {
-		List<User> users = Arrays.asList(
+		List<User> users = List.of(
 				new User(0, faker.name().fullName(), faker.internet().password(8, 16, true, true, true), faker.number().numberBetween(10, 50), 2, faker.internet().emailAddress()),
 				new User(0, faker.name().fullName(), faker.internet().password(8, 16, true, true, true), faker.number().numberBetween(10, 50), 2, faker.internet().emailAddress())
 				);
@@ -184,7 +183,7 @@ public class TestUser extends TestBase {
 		System.out.println(user);
 		
 		// 第三次查询
-		newSession = MybatisUtil.getAutoCommitSession();
+//		newSession = MybatisUtil.getAutoCommitSession();
 		newUserDao = session.getMapper(UserMapper.class);
 		user = newUserDao.getUserById(testNewUser.getId());
 		System.out.println(user);

@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class ReadOnlyCollectionDemo {
 
 	private final static Logger logger = LoggerFactory.getLogger(ReadOnlyCollectionDemo.class);
-	
+
 	static void readOnlyCollectionJava8() {
 		List<String> list = new ArrayList<>();
 		list.add("abc");

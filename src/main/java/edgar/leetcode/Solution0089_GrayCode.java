@@ -1,13 +1,11 @@
 package edgar.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * 89. 格雷编码
- * https://leetcode-cn.com/problems/gray-code/
- * 
+ * <a href="https://leetcode-cn.com/problems/gray-code/">89. 格雷编码</a>
+ *
  * @author liuzhao
  *
  */
@@ -36,14 +34,14 @@ public class Solution0089_GrayCode {
 		 * 输出：[0,1,3,2]
 		 */
 		result = grayCode(2);
-		assert Arrays.asList(0,1,3,2).equals(result);
+		assert List.of(0,1,3,2).equals(result);
 		
 		/*
 		 * 输入：n = 1
 		 * 输出：[0,1]
 		 */
 		result = grayCode(1);
-		assert Arrays.asList(0,1).equals(result);
+		assert List.of(0,1).equals(result);
 	}
 
 }

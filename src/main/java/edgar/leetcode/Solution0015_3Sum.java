@@ -7,16 +7,15 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 15. 三数之和
- * https://leetcode-cn.com/problems/3sum/
- * 
+ * <a href="https://leetcode-cn.com/problems/3sum/">15. 三数之和</a>
+ *
  * @author Administrator
  *
  */
 public class Solution0015_3Sum {
 	
 	public static List<List<Integer>> threeSum1(int[] nums) {
-		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		Set<List<Integer>> result = new HashSet<>();
 		
 		// 先对输入数组进行排序
 		Arrays.sort(nums);
@@ -41,14 +40,14 @@ public class Solution0015_3Sum {
 				for (int k = j + 1; k < nums.length; k++) {
 					if (nums[i] + nums[j] + nums[k] == 0) {
 						Integer[] match = new Integer[] {nums[i], nums[j], nums[k]};
-						result.add(Arrays.asList(match));
+						result.add(List.of(match));
 					}
 				}
 			}
 		}
 		
 		// Set to List
-		return new ArrayList<List<Integer>>(result);
+		return new ArrayList<>(result);
     }
 	
 	/**
@@ -61,11 +60,11 @@ public class Solution0015_3Sum {
 	 *	2
 	 *	 )，nn 为数组长度
  	 *
-	 * @param nums
-	 * @return
+	 * @param nums 输入数字数组
+	 * @return List<List<Integer>> 排列组合数组
 	 */
 	public static List<List<Integer>> threeSum(int[] nums) {
-		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		Set<List<Integer>> result = new HashSet<>();
 		
 		// 先对输入数组进行排序
 		Arrays.sort(nums);
@@ -87,7 +86,7 @@ public class Solution0015_3Sum {
 				int sum = nums[i] + nums[L] + nums[R];
 				if (sum == 0) {
 					Integer[] match = new Integer[] {nums[i], nums[L], nums[R]};
-					result.add(Arrays.asList(match));
+					result.add(List.of(match));
 					
 					while (L < R && nums[L] == nums[L+1]) {
 						L++;		// 去重
@@ -107,7 +106,7 @@ public class Solution0015_3Sum {
 		}
 		
 		// Set to List
-		return new ArrayList<List<Integer>>(result);
+		return new ArrayList<>(result);
     }
 
 	public static void main(String[] args) {
@@ -129,7 +128,7 @@ public class Solution0015_3Sum {
 		result = threeSum(nums);
 		time = System.currentTimeMillis() - start;
 		System.out.println(result);
-		System.out.println(String.format("processTime = %d ms", time));
+		System.out.printf("processTime = %d ms\n", time);
 		
 		// 输入：nums = [0,0,0]
 		/*
@@ -153,7 +152,7 @@ public class Solution0015_3Sum {
 		result = threeSum(nums);
 		time = System.currentTimeMillis() - start;
 		System.out.println(result);
-		System.out.println(String.format("processTime = %d ms", time));
+		System.out.printf("processTime = %d ms\n", time);
 	}
 
 }

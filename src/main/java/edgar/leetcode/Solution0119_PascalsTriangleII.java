@@ -12,10 +12,10 @@ public class Solution0119_PascalsTriangleII {
     public static List<Integer> getRow(int rowIndex) {
 
         if (rowIndex == 0) {
-            return Arrays.asList(1);
+            return List.of(1);
         }
 
-        ArrayList<Integer> currentRow = new ArrayList<>(Arrays.asList(1, 1));
+        ArrayList<Integer> currentRow = new ArrayList<>(List.of(1, 1));
         if (rowIndex == 1) {
             return currentRow;
         }
@@ -51,20 +51,20 @@ public class Solution0119_PascalsTriangleII {
          * 输出: [1]
          */
         result = getRow(0);
-        assert result.equals(Arrays.asList(1));
+        assert result.equals(List.of(1));
 
         /*
          * 输入: rowIndex = 1
          * 输出: [1,1]
          */
         result = getRow(1);
-        assert result.equals(Arrays.asList(1, 1));
+        assert result.equals(List.of(1, 1));
 
         /*
          * 输入: rowIndex = 3
          * 输出: [1,3,3,1]
          */
         result = getRow(3);
-        assert result.equals(Arrays.asList(1, 3, 3, 1));
+        assert result.equals(List.of(1, 3, 3, 1));
     }
 }

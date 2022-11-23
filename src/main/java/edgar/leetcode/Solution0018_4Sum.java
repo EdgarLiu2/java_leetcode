@@ -7,16 +7,15 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 18. 四数之和
- * https://leetcode-cn.com/problems/4sum/
- * 
+ * <a href="https://leetcode-cn.com/problems/4sum/">18. 四数之和</a>
+ *
  * @author Administrator
  *
  */
 public class Solution0018_4Sum {
 	
 	public static List<List<Integer>> fourSum(int[] nums, int target) {
-		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		Set<List<Integer>> result = new HashSet<>();
 		
 		// 先对输入数组进行排序
 		Arrays.sort(nums);
@@ -45,7 +44,7 @@ public class Solution0018_4Sum {
 					
 					if (cur_sum == target) {
 						Integer[] match = new Integer[] {nums[i], nums[j], nums[L], nums[R]};
-						result.add(Arrays.asList(match));
+						result.add(List.of(match));
 						L++;
 					} else if (cur_sum > target) {
 						R--;
@@ -66,7 +65,7 @@ public class Solution0018_4Sum {
 		}
 		
 		// Set to List
-		return new ArrayList<List<Integer>>(result);
+		return new ArrayList<>(result);
     }
 
 	public static void main(String[] args) {

@@ -23,15 +23,18 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>19</java.version>
+		<java.version>18</java.version>
 
 		<elasticsearch.version>7.14.1</elasticsearch.version>
+		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.client -->
 		<canal.version>1.1.6</canal.version>
 		<mybatis.version>3.5.9</mybatis.version>
 		<mybatis.plus.version>3.5.2</mybatis.plus.version>
 		<jdbc.version>8.0.30</jdbc.version>
 		<netty.version>4.1.84.Final</netty.version>
 		<logback.version>1.4.4</logback.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
+		<tomcat.version>10.1.2</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -41,19 +44,16 @@
 			<artifactId>jedis</artifactId>
 			<version>4.3.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.client -->
 		<dependency>
 			<groupId>com.alibaba.otter</groupId>
 			<artifactId>canal.client</artifactId>
 			<version>${canal.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.protocol -->
 		<dependency>
 		    <groupId>com.alibaba.otter</groupId>
 		    <artifactId>canal.protocol</artifactId>
 		    <version>${canal.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.alibaba.otter/canal.common -->
 		<dependency>
 		    <groupId>com.alibaba.otter</groupId>
 		    <artifactId>canal.common</artifactId>
@@ -101,11 +101,10 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
 		    <artifactId>tomcat-embed-core</artifactId>
-		    <version>10.0.23</version>
+		    <version>${tomcat.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.openjdk.jol/jol-core -->
 		<dependency>

@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 49. 字母异位词分组
- * https://leetcode-cn.com/problems/group-anagrams/
- * 
+ * <a href="https://leetcode-cn.com/problems/group-anagrams/">49. 字母异位词分组</a>
+ *
  * @author liuzhao
  *
  */
@@ -21,7 +20,7 @@ public class Solution0049_GroupAnagrams {
 		if (strs.length == 0) {
 			return Collections.emptyList();
 		} else if (strs.length == 1) {
-			result.add(Arrays.asList(strs));
+			result.add(List.of(strs));
 			return result;
 		}
 		
@@ -42,7 +41,7 @@ public class Solution0049_GroupAnagrams {
 			String key = sb.toString();
 
 			if (!groupAnagrms.containsKey(key)) {
-				groupAnagrms.put(key, new ArrayList<String>());
+				groupAnagrms.put(key, new ArrayList<>());
 			}
 			groupAnagrms.get(key).add(word);
 			
@@ -59,7 +58,7 @@ public class Solution0049_GroupAnagrams {
 		if (strs.length == 0) {
 			return Collections.emptyList();
 		} else if (strs.length == 1) {
-			result.add(Arrays.asList(strs));
+			result.add(List.of(strs));
 			return result;
 		}
 		
@@ -73,7 +72,7 @@ public class Solution0049_GroupAnagrams {
 			if (groupAnagrms.containsKey(key)) {
 				groupAnagrms.get(key).add(word);
 			} else {
-				groupAnagrms.put(key, new ArrayList<String>() {{
+				groupAnagrms.put(key, new ArrayList<>() {{
 					add(word);
 				}});
 			}

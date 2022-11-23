@@ -6,8 +6,9 @@ public class InterfacePrivateDemo {
 		MyInterfaceImpl object = new MyInterfaceImpl();
 		object.methodPublic();
 		object.methodDefault();
-		// 接口的静态方法无法直接调用
+		// 接口的静态方法无法通过类对象调用
 //		object.methodStatic();
+		MyInterface.methodStatic();
 	}
 
 }

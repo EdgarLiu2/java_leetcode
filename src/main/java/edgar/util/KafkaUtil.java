@@ -1,7 +1,7 @@
 package edgar.util;
 
 import java.time.Duration;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.kafka.clients.consumer.Consumer;
@@ -21,8 +21,8 @@ public class KafkaUtil {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private PropertiesUtil props;
-	private String env;
-	private String topicConfigKey;
+	private final String env;
+	private final String topicConfigKey;
 	
 	private String bootstrapServersConfig;
 	private KafkaProducer<String, String> producer;
@@ -72,7 +72,7 @@ public class KafkaUtil {
 			consumer = new KafkaConsumer<>(consumerProps);
 	        logger.info("Created KafkaConsumer to {}", this.bootstrapServersConfig);
 	        
-	        consumer.subscribe(Arrays.asList(getTopicName()));	// 可消费多个topic,组成一个list
+	        consumer.subscribe(List.of(getTopicName()));	// 可消费多个topic,组成一个list
 	        logger.info("KafkaConsumer subscribed topic: {}", this.getTopicName());
 		} catch (KafkaException e) {
 			logger.error(String.format("Failed to create KafkaConsumer to %s", bootstrapServersConfig), e);

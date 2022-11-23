@@ -64,10 +64,10 @@ public class Solution0120_Triangle {
          * 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
          */
         inputs = new ArrayList<>();
-        inputs.add(Arrays.asList(2));
-        inputs.add(Arrays.asList(3, 4));
-        inputs.add(Arrays.asList(6, 5, 7));
-        inputs.add(Arrays.asList(4, 1, 8, 3));
+        inputs.add(List.of(2));
+        inputs.add(List.of(3, 4));
+        inputs.add(List.of(6, 5, 7));
+        inputs.add(List.of(4, 1, 8, 3));
         assert 11 == minimumTotal(inputs);
 
         /*
@@ -75,7 +75,7 @@ public class Solution0120_Triangle {
          * 输出：-10
          */
         inputs = new ArrayList<>();
-        inputs.add(Arrays.asList(-10));
+        inputs.add(List.of(-10));
         assert -10 == minimumTotal(inputs);
     }
 }

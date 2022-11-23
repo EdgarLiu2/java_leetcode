@@ -1,7 +1,6 @@
 package edgar.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public class Solution0118_PascalsTriangle {
             return result;
         }
 
-        ArrayList<Integer> previousRow = new ArrayList<>(Arrays.asList(1));
+        ArrayList<Integer> previousRow = new ArrayList<>(List.of(1));
         result.add(previousRow);
 
         if (numRows == 1) {

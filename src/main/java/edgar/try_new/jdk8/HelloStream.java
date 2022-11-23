@@ -10,9 +10,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * Java 8 新特性-Stream
- * https://www.toutiao.com/a6770603570233344524/
- * 
+ * <a href="https://www.toutiao.com/a6770603570233344524/">Java 8 新特性-Stream</a>
+ *
  * @author Administrator
  *
  */
@@ -68,8 +67,8 @@ public class HelloStream {
 	
 	public static void mapTest6() {
 		// 小写字母转大写
-		List<String> strings = Arrays.asList("java", "python", "go");
-		strings.stream().map(str -> str.toUpperCase()).forEach(System.out::println);
+		List<String> strings = List.of("java", "python", "go");
+		strings.stream().map(String::toUpperCase).forEach(System.out::println);
 		
 		// 筛选出年龄，再过滤出大于15
 		List<Student> students = Student.getStudents();
@@ -79,7 +78,7 @@ public class HelloStream {
 	
 	public static void sortTest7() {
 		// 直接排序，如果对象实现了Comparable接口
-		List<Integer> intList = Arrays.asList(56, 4, 56, 7, 8, 4, 4, 5, 654, 346, 3453, 4634, 5);
+		List<Integer> intList = List.of(56, 4, 56, 7, 8, 4, 4, 5, 654, 346, 3453, 4634, 5);
 		intList.stream().sorted().forEach(System.out::println);
 		
 		// 直接指定comparable
@@ -119,7 +118,7 @@ public class HelloStream {
 	
 	public static void reduceTest9() {
 		// 求和
-		List<Integer> intList = Arrays.asList(56, 4, 56, 7, 8, 4, 4, 5, 654, 346, 3453, 4634, 5);
+		List<Integer> intList = List.of(56, 4, 56, 7, 8, 4, 4, 5, 654, 346, 3453, 4634, 5);
 		int sum = intList.stream().reduce(0, Integer::sum);
 		System.out.println(sum);
 		
@@ -133,7 +132,7 @@ public class HelloStream {
 		List<Student> students = Student.getStudents();
 		
 		// 返回一个List
-		List<Student> studentsAge14 = students.stream().filter(e -> e.getAge() > 14).collect(Collectors.toList());
+		List<Student> studentsAge14 = students.stream().filter(e -> e.getAge() > 14).toList();
 		studentsAge14.stream().forEach(System.out::println);
 		// 返回一个Set
 		Set<Student> studentsAge16 = students.stream().filter(e -> e.getAge() > 16).collect(Collectors.toSet());

@@ -1,14 +1,12 @@
 package edgar.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * 54. 螺旋矩阵
- * https://leetcode-cn.com/problems/spiral-matrix/
- * 
+ * <a href="https://leetcode-cn.com/problems/spiral-matrix/">54. 螺旋矩阵</a>
+ *
  * @author liuzhao
  *
  */
@@ -58,7 +56,7 @@ public class Solution0054_SpiralMatrix {
 			left++;
 		}
 
-		return Arrays.asList(arrays);
+		return List.of(arrays);
 	}
 	
 	public static List<Integer> spiralOrder2(int[][] matrix) {

@@ -6,12 +6,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class NewHTTPClient {
-	
-	private final static Logger logger = LoggerFactory.getLogger(NewHTTPClient.class);
 	
 	static void httpClientSyncCall() {
 		HttpClient client = HttpClient.newHttpClient();
@@ -23,10 +21,10 @@ public class NewHTTPClient {
 			// 同步请求
 			HttpResponse<String> response = client.send(request, responseBodyHandler);
 			String body = response.body();
-			logger.info("header = {}", response.headers());
-			logger.info("response = {}", body);
+			log.info("header = {}", response.headers());
+			log.info("response = {}", body);
 		} catch (Exception e) {
-			logger.error("Can't make HTTP request ", e);
+			log.error("Can't make HTTP request ", e);
 		}
 		
 	}
@@ -43,8 +41,9 @@ public class NewHTTPClient {
 		
 		try {
 			HttpResponse<String> response = sendAsync.get();
+			log.info("response = {}", response.body());
 		} catch (Exception e) {
-			logger.error("Can't make HTTP request ", e);
+			log.error("Can't make HTTP request ", e);
 		}
 	}
 

@@ -13,14 +13,14 @@ public class TryUpgrade {
 	 * Java 8之前，资源关闭在finally进行
 	 */
 	static void tryBeforeJava8() {
-		InputStreamReader reader = null;
+		InputStreamReader reader;
 		reader = new InputStreamReader(System.in);
-		char[] cbuf = new char[20];
-		int len = 0;
+		char[] buffer = new char[20];
+		int len;
 		
 		try {
-			if ( (len = reader.read(cbuf)) != -1) {
-				String msg = new String(cbuf, 0, len);
+			if ( (len = reader.read(buffer)) != -1) {
+				String msg = new String(buffer, 0, len);
 				logger.info("msg={}", msg);
 			}
 		} catch (IOException e) {
@@ -39,12 +39,12 @@ public class TryUpgrade {
 	 */
 	static void tryJava8() {
 		
-		// 初始化希望自动管理的资源
+		// 初始化希望自动管理的资源，必须放在try中
 		try (InputStreamReader reader = new InputStreamReader(System.in)) {
-			char[] cbuf = new char[20];
-			int len = 0;
-			if ( (len = reader.read(cbuf)) != -1) {
-				String msg = new String(cbuf, 0, len);
+			char[] buffer = new char[20];
+			int len;
+			if ( (len = reader.read(buffer)) != -1) {
+				String msg = new String(buffer, 0, len);
 				logger.info("msg={}", msg);
 			}
 		} catch (IOException e) {
@@ -62,10 +62,10 @@ public class TryUpgrade {
 
 		// 声明希望自动管理的资源
 		try (reader) {
-			char[] cbuf = new char[20];
-			int len = 0;
-			if ( (len = reader.read(cbuf)) != -1) {
-				String msg = new String(cbuf, 0, len);
+			char[] buffer = new char[20];
+			int len;
+			if ( (len = reader.read(buffer)) != -1) {
+				String msg = new String(buffer, 0, len);
 				logger.info("msg={}", msg);
 			}
 		} catch (IOException e) {

@@ -44,7 +44,7 @@ public class Solution0139_WordBreak {
          * 解释: 返回 true 因为 "leetcode" 可以由 "leet" 和 "code" 拼接成。
          */
         input = "leetcode";
-        wordDict = Arrays.asList("leet", "code");
+        wordDict = List.of("leet", "code");
         assert wordBreak(input, wordDict);
 
         /*
@@ -54,7 +54,7 @@ public class Solution0139_WordBreak {
          *      注意，你可以重复使用字典中的单词。
          */
         input = "applepenapple";
-        wordDict = Arrays.asList("apple", "pen");
+        wordDict = List.of("apple", "pen");
         assert wordBreak(input, wordDict);
 
         /*
@@ -62,7 +62,7 @@ public class Solution0139_WordBreak {
          * 输出: false
          */
         input = "catsandog";
-        wordDict = Arrays.asList("cats", "dog", "sand", "and", "cat");
+        wordDict = List.of("cats", "dog", "sand", "and", "cat");
         assert !wordBreak(input, wordDict);
     }
 }

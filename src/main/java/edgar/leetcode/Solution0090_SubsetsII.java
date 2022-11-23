@@ -6,9 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 90. 子集 II
- * https://leetcode-cn.com/problems/subsets-ii/
- * 
+ * <a href="https://leetcode-cn.com/problems/subsets-ii/">90. 子集 II</a>
+ *
  * @author liuzhao
  *
  */
@@ -51,7 +50,7 @@ public class Solution0090_SubsetsII {
 		if (nums.length == 0) {
 			return result;
 		} else if (nums.length == 1) {
-			result.add(Arrays.asList(nums[0]));
+			result.add(List.of(nums[0]));
 			return result;
 		}
 		

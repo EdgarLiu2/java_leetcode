@@ -1,16 +1,14 @@
 package edgar.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 /**
- * 22. 括号生成
- * https://leetcode-cn.com/problems/generate-parentheses/
- * 
+ * <a href="https://leetcode-cn.com/problems/generate-parentheses/">22. 括号生成</a>
+ *
  * @author Administrator
  *
  */
@@ -20,10 +18,10 @@ public class Solution0022_GenerateParentheses {
 		if (n == 0) {
 			return Collections.emptyList();
 		} else if (n == 1) {
-			return Arrays.asList("()");
+			return List.of("()");
 		}
 		
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		dfs("", n, n, result);
 
 		return result;
@@ -33,7 +31,7 @@ public class Solution0022_GenerateParentheses {
      * @param path  从根结点到任意结点的路径，全程只使用一份
      * @param left  左括号还有几个可以使用
      * @param right 右括号还有几个可以使用
-     * @param res
+     * @param result 结果
      */
 	public static void dfs(String path, int left, int right, List<String> result) {
 		if (left == 0 && right == 0) {
@@ -60,18 +58,18 @@ public class Solution0022_GenerateParentheses {
 		if (n == 0) {
 			return Collections.emptyList();
 		} else if (n == 1) {
-			return Arrays.asList("()");
+			return List.of("()");
 		}
 		
 		List<String> subResult = generateParenthesis(n-1);
-		Set<String> result = new HashSet<String>();
+		Set<String> result = new HashSet<>();
 		for(String elem : subResult ) {
 			result.add("()" + elem);
 			result.add("(" + elem + ")");
 			result.add(elem + "()");
 		}
 
-		List<String> r = new ArrayList<String>(result);
+		List<String> r = new ArrayList<>(result);
 		Collections.sort(r);
 		return r;
     }

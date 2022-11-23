@@ -9,20 +9,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 47. 全排列 II
- * https://leetcode-cn.com/problems/permutations-ii/
- * 
+ * <a href="https://leetcode-cn.com/problems/permutations-ii/">47. 全排列 II</a>
+ *
  * @author liuzhao
  *
  */
 public class Solution0047_PermutationsII {
 	
 	public static List<List<Integer>> permuteUnique(int[] nums) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<List<Integer>> result = new ArrayList<>();
 		if (nums.length == 0) {
 			return result;
 		} else if (nums.length == 1) {
-			List<Integer> r = Arrays.asList(nums[0]);
+			List<Integer> r = List.of(nums[0]);
 			result.add(r);
 			return result;
 		}
@@ -56,7 +55,7 @@ public class Solution0047_PermutationsII {
 			 * - 当前要走的分支，跟之前分支完全一样
 			 * - 且之前的分支是刚被撤销回退的分支
 			 */
-			if (i > 0 && nums[i] == nums[i-1] && used[i-1] == false) {
+			if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) {
 				continue;
 			}
 			
@@ -69,21 +68,21 @@ public class Solution0047_PermutationsII {
 	}
 
 	public static List<List<Integer>> permuteUnique2(int[] nums) {
-		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		Set<List<Integer>> result = new HashSet<>();
 		if (nums.length == 0) {
 			return new ArrayList<>(result);
 		} else if (nums.length == 1) {
-			List<Integer> r = Arrays.asList(nums[0]);
+			List<Integer> r = List.of(nums[0]);
 			result.add(r);
 			return new ArrayList<>(result);
 		}
 		
 		List<Integer> list = new ArrayList<>();
-		for (int i = 0; i < nums.length; i++ ) {
-			list.add(nums[i]);
+		for (int num : nums) {
+			list.add(num);
 		}
 		
-		dfs(list, new ArrayList<Integer>(), result);
+		dfs(list, new ArrayList<>(), result);
 		
 		return new ArrayList<>(result);
 	}

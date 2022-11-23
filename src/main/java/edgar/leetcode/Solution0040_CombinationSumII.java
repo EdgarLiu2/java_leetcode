@@ -9,9 +9,8 @@ import java.util.Set;
 import java.util.Stack;
 
 /**
- * 40. 组合总和 II
- * https://leetcode-cn.com/problems/combination-sum-ii/
- * 
+ * <a href="https://leetcode-cn.com/problems/combination-sum-ii/">40. 组合总和 II</a>
+ *
  * @author Administrator
  *
  */
@@ -22,11 +21,11 @@ public class Solution0040_CombinationSumII {
 			return Collections.emptyList();
 		}
 		
-		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		Set<List<Integer>> result = new HashSet<>();
 		
 		if (candidates.length == 1) {
 			if (candidates[0] == target) {
-				result.add(Arrays.asList(new Integer[]{target}));
+				result.add(List.of(new Integer[]{target}));
 				return new ArrayList<>(result);
 			} else {
 				return Collections.emptyList();
@@ -35,7 +34,7 @@ public class Solution0040_CombinationSumII {
 		
 		// 排序
 		Arrays.sort(candidates);
-		Stack<Integer> path = new Stack<Integer>();
+		Stack<Integer> path = new Stack<>();
 		dfs(candidates, 0, target, path, result);
 		
 		return new ArrayList<>(result);

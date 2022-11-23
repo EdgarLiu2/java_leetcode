@@ -1,6 +1,6 @@
 package edgar.interview.collection;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,7 +38,7 @@ public class MapDemo {
 		}
 		
 		long start = System.currentTimeMillis();
-		Arrays.asList(threads).forEach(t -> t.start());
+		List.of(threads).forEach(Thread::start);
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
@@ -78,7 +78,7 @@ public class MapDemo {
 		}
 		
 		long start = System.currentTimeMillis();
-		Arrays.asList(threads).forEach(t -> t.start());
+		List.of(threads).forEach(Thread::start);
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
@@ -90,7 +90,7 @@ public class MapDemo {
 	}
 	
 	public static void main(String[] args) {
-//		testConcurrentMap();
+		testConcurrentMap();
 		testConcurrentSkipListMap();
 	}
 

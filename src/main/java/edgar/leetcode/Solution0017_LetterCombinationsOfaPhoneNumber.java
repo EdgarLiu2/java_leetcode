@@ -1,16 +1,14 @@
 package edgar.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 17. 电话号码的字母组合
- * https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
- * 
+ * <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">17. 电话号码的字母组合</a>
+ *
  * @author Administrator
  *
  */
@@ -31,7 +29,7 @@ public class Solution0017_LetterCombinationsOfaPhoneNumber {
 //				"8", "tuv",
 //				"9", "wxyz"
 //		);
-		Map<String, String> numberCharacter = new HashMap<String, String>() {{
+		Map<String, String> numberCharacter = new HashMap<>() {{
 			put("2", "abc");
 			put("3", "def");
 			put("4", "ghi");
@@ -54,14 +52,14 @@ public class Solution0017_LetterCombinationsOfaPhoneNumber {
 				Map.entry("9", "wxyz")
 		);
 		*/
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		for (char ch : digits.toCharArray()) {
 			if (result.size() == 0) {
 				for (char c : numberCharacter.get(String.valueOf(ch)).toCharArray() ) {
 					result.add(String.valueOf(c));
 				}
 			} else {
-				List<String> list = new ArrayList<String>();
+				List<String> list = new ArrayList<>();
 				for (String elem : result) {
 					for (char c : numberCharacter.get(String.valueOf(ch)).toCharArray() ) {
 						list.add(elem + c);
@@ -76,7 +74,7 @@ public class Solution0017_LetterCombinationsOfaPhoneNumber {
     }
 
 	public static void main(String[] args) {
-		String input = "";
+		String input;
 		List<String> result;
 		
 		/*
@@ -84,7 +82,7 @@ public class Solution0017_LetterCombinationsOfaPhoneNumber {
 		 * 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 		 */
 		input = "23";
-		List<String> expectedResult = Arrays.asList("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf");
+		List<String> expectedResult = List.of("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf");
 		result = letterCombinations(input);
 		System.out.println(result);
 		
