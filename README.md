@@ -1,14 +1,18 @@
 # Create Maven Project
 ```xml
+<settings>
 	<localRepository>D:/workspace/projects/.m2/repository</localRepository>
-	
-	<!-- 阿里云仓库 -->
-	<mirror>
-		<id>alimaven</id>
-		<mirrorOf>central</mirrorOf>
-		<name>aliyun maven</name>
-		<url>https://maven.aliyun.com/repository/central</url>
-	</mirror>
+
+    <mirrors>
+        <!-- 阿里云仓库 -->
+        <mirror>
+            <id>alimaven</id>
+            <mirrorOf>central</mirrorOf>
+            <name>aliyun maven</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </mirror>
+    </mirrors>
+</settings>
 ```
 
 ```bash
@@ -18,6 +22,12 @@ mvn archetype:generate -DgroupId=edgar.test -DartifactId=leetcode -DarchetypeArt
 
 
 # https://leetcode-cn.com/problemset/all/
+
+## 左程云算法课
+
+- [全部代码](https://github.com/algorithmzuo)
+- [完整大纲](https://github.com/algorithmzuo/class-notes)
+- [完整笔记](https://shimo.im/docs/68cd6h3TwygPwx8W/read)
 
 # Mybatis
 
