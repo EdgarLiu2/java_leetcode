@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 70. 爬楼梯
- * https://leetcode-cn.com/problems/climbing-stairs/
- * 
+ * <a href="https://leetcode-cn.com/problems/climbing-stairs/">70. 爬楼梯</a>
+ *
  * @author liuzhao
  *
  */
@@ -23,11 +22,9 @@ public class Solution0070_ClimbingStairs {
     	if (n == 2) {
     		return 2;
     	}
-    	
-    	
-    	int n1 = 0;
-    	int n2 = 0;
-    	
+
+    	int n1, n2;
+
     	if (localCache.containsKey(n - 2)) {
     		n2 = localCache.get(n - 2);
     	} else {
