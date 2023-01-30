@@ -5,18 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
- * 1. 两数之和
- * https://leetcode-cn.com/problems/two-sum
- * 
- * @author Administrator
- *
+ * <a href="https://leetcode-cn.com/problems/two-sum">1. 两数之和</a>
+ * Created by Edgar.Liu on 2023/1/30
  */
 public class Solution0001_TwoSum {
 	
 	public static int[] twoSum1(int[] nums, int target) {
-        int numA = 0;
-        int numB = 0;
+        int numA;
+        int numB;
         for(int i = 0; i < nums.length ; i++) {
             numA = i;
             int diff = target - nums[numA];
@@ -32,7 +28,7 @@ public class Solution0001_TwoSum {
     }
 	
 	public static int[] twoSum2(int[] nums, int target) {
-		Map<Integer, Integer> cache = new HashMap<>();
+		Map<Integer, Integer> cache = new HashMap<>(nums.length);
 		
 		for(int i = 0; i < nums.length ; i++) {
 			int numA = nums[i];
@@ -47,9 +43,6 @@ public class Solution0001_TwoSum {
 		return new int[]{-1, -1};
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		int[] input1 = {2,7,11,15};
 		int[] result;
