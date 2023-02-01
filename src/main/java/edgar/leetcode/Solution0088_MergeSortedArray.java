@@ -3,13 +3,19 @@ package edgar.leetcode;
 import java.util.Arrays;
 
 /**
- * 88. 合并两个有序数组
- * https://leetcode-cn.com/problems/merge-sorted-array/
- * 
- * @author liuzhao
- *
+ * <a href="https://leetcode-cn.com/problems/merge-sorted-array/">88. 合并两个有序数组</a>
+ * Created by Edgar.Liu on 2023/1/26
  */
 public class Solution0088_MergeSortedArray {
+
+	public static void merge1(int[] nums1, int m, int[] nums2, int n) {
+
+		// 将nums2复制到nums1的尾部
+		System.arraycopy(nums2, 0, nums1, m, n);
+		// 对nums1进行快速排序
+		Arrays.sort(nums1);
+
+	}
 
 	public static void merge(int[] nums1, int m, int[] nums2, int n) {
 		if (n == 0) {
