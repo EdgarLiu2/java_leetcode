@@ -1,17 +1,16 @@
 package edgar.leetcode;
 
 /**
- * 21. 合并两个有序链表
- * https://leetcode-cn.com/problems/merge-two-sorted-lists/
- * 
- * @author Administrator
+ * <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a>
+ * Created by Edgar.Liu on 2023/2/5
  *
  */
 public class Solution0021_MergeTwoSortedLists {
 	 public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 		 if (l1 == null) {
 			 return l2;
-		 } else if (l2 == null) {
+		 }
+		 if (l2 == null) {
 			 return l1;
 		 }
 		 
