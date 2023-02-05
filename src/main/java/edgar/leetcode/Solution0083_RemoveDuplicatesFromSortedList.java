@@ -1,15 +1,32 @@
 package edgar.leetcode;
 
 /**
- * 83. 删除排序链表中的重复元素
- * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/
- * 
- * @author liuzhao
- *
+ * <a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/">83. 删除排序链表中的重复元素</a>
+ * Created by Edgar.Liu on 2023/2/5
  */
 public class Solution0083_RemoveDuplicatesFromSortedList {
 
 	public static ListNode deleteDuplicates(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+
+		ListNode pNode = head;
+
+		while (pNode.next != null) {
+			if (pNode.val == pNode.next.val) {
+				// pNode和pNode.next相同，删除pNode.next
+				pNode.next = pNode.next.next;
+			} else {
+				// pNode向后移动
+				pNode = pNode.next;
+			}
+		}
+
+		return head;
+	}
+
+	public static ListNode deleteDuplicates2(ListNode head) {
 		if (head == null || head.next == null) {
 			return head;
 		}
