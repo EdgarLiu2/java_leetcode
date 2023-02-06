@@ -1,5 +1,9 @@
 package edgar.leetcode;
 
+/**
+ * <a href="https://leetcode.cn/problems/linked-list-cycle/">141. 环形链表</a>
+ * Created by Edgar.Liu on 2023/2/6
+ */
 public class Solution0141_LinkedListCycle {
 
 	public static boolean hasCycle(ListNode head) {
@@ -9,14 +13,9 @@ public class Solution0141_LinkedListCycle {
 		// 慢指针每次走一步
 		ListNode slow = head;
 		
-		while (fast != null && slow != null) {
+		while (fast != null && fast.next != null) {
 			slow = slow.next;
-			fast = fast.next;
-			if (fast != null) {
-				fast = fast.next;
-			} else {
-				break;
-			}
+			fast = fast.next.next;
 			
 			if (slow == fast) {
 				// 快指针和慢指针重合
