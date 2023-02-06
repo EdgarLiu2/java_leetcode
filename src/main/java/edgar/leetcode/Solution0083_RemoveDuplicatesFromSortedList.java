@@ -2,7 +2,7 @@ package edgar.leetcode;
 
 /**
  * <a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/">83. 删除排序链表中的重复元素</a>
- * Created by Edgar.Liu on 2023/2/5
+ * Created by Edgar.Liu on 2023/2/6
  */
 public class Solution0083_RemoveDuplicatesFromSortedList {
 
