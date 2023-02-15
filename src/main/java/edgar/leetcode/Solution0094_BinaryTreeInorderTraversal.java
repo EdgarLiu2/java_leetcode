@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 94. 二叉树的中序遍历
- * https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
- * 
- * @author liuzhao
+ * <a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/">94. 二叉树的中序遍历</a>
+ * Created by Edgar.Liu on 2023/2/15
  *
  */
 public class Solution0094_BinaryTreeInorderTraversal {
