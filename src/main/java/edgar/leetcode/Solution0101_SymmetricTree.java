@@ -4,19 +4,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 101. 对称二叉树
- * https://leetcode.cn/problems/symmetric-tree/
- * 
- * @author liuzhao
- *
+ * <a href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树101. 对称二叉树</a>
+ * Created by Edgar.Liu on 2023/2/19
  */
 public class Solution0101_SymmetricTree {
 	
 	/**
 	 * 使用队列，进行广度优先遍历
-	 * 
-	 * @param root
-	 * @return
 	 */
 	public static boolean isSymmetric(TreeNode root) {
 		if (root == null) {
@@ -38,14 +32,16 @@ public class Solution0101_SymmetricTree {
 			}
 			
 			if (t1 == null || t2 == null) {
-				// 一个为空，另一个不为空，不对称
+				// 一个为空，另一个不为空，不对称，可返回
 				return false;
 			}
 			
 			if (t1.val != t2.val) {
-				// 两个节点值不同
+				// 两个节点值不同，不对称，可返回
 				return false;
 			}
+
+			// t1与t2相同，继续检查t1和t2的子树
 			
 			// t1的左子节点与t2的右子节点配对进行比较
 			queue.add(t1.left);
@@ -60,9 +56,6 @@ public class Solution0101_SymmetricTree {
 
 	/**
 	 * 使用递归算法
-	 * 
-	 * @param root
-	 * @return
 	 */
 	public static boolean isSymmetric2(TreeNode root) {
 		if (root == null) {
@@ -105,7 +98,8 @@ public class Solution0101_SymmetricTree {
 					new TreeNode(3))
 				);
 		assert isSymmetric(root);
-		
+		assert isSymmetric2(root);
+
 		/*
 		 * 输入：root = [1,2,2,null,3,null,3]
 		 * 输出：false
@@ -119,6 +113,7 @@ public class Solution0101_SymmetricTree {
 					new TreeNode(3))
 				);
 		assert !isSymmetric(root);
+		assert !isSymmetric2(root);
 	}
 
 }
