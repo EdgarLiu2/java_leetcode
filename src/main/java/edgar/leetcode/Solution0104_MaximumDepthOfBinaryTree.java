@@ -1,9 +1,8 @@
 package edgar.leetcode;
 
 /**
- * 104. 二叉树的最大深度
- * https://leetcode.cn/problems/maximum-depth-of-binary-tree/
- * Created by liuzhao on 2022/6/16
+ * <a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a>
+ * Created by Edgar.Liu on 2022/6/16
  */
 public class Solution0104_MaximumDepthOfBinaryTree {
     public static int maxDepth(TreeNode root) {
@@ -12,7 +11,7 @@ public class Solution0104_MaximumDepthOfBinaryTree {
             return 0;
         }
 
-        return Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
     public static int maxDepth2(TreeNode root) {
@@ -31,7 +30,7 @@ public class Solution0104_MaximumDepthOfBinaryTree {
         int leftMaxDepth = dfs(root.left, level + 1);
         int rightMaxDepth = dfs(root.right, level + 1);
 
-        return leftMaxDepth > rightMaxDepth ? leftMaxDepth : rightMaxDepth;
+        return Math.max(leftMaxDepth, rightMaxDepth);
     }
 
     public static void main(String[] args) {
@@ -47,5 +46,6 @@ public class Solution0104_MaximumDepthOfBinaryTree {
                         new TreeNode(15),
                         new TreeNode(7)));
         assert 3 == maxDepth(root);
+        assert 3 == maxDepth2(root);
     }
 }
