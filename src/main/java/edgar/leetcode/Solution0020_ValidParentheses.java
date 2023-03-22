@@ -1,15 +1,10 @@
 package edgar.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
- * 20. 有效的括号
- * https://leetcode-cn.com/problems/valid-parentheses/
- * 
- * @author Administrator
- *
+ * <a href="https://leetcode-cn.com/problems/valid-parentheses/">20. 有效的括号</a>
+ * Created by Edgar.Liu on 2023/3/21
  */
 public class Solution0020_ValidParentheses {
 //	public static Map<Character, Character> parenthesesMap = Map.of(
@@ -17,10 +12,10 @@ public class Solution0020_ValidParentheses {
 //			Character.valueOf(']'), Character.valueOf('['), 
 //			Character.valueOf('}'), Character.valueOf('{') 
 //	);
-	public static Map<Character, Character> parenthesesMap = new HashMap<Character, Character>() {{
-		put(Character.valueOf(')'), Character.valueOf('('));
-		put(Character.valueOf(']'), Character.valueOf('['));
-		put(Character.valueOf('}'), Character.valueOf('{') );
+	public static Map<Character, Character> parenthesesMap = new HashMap<>() {{
+		put(')', '(');
+		put(']', '[');
+		put('}', '{');
 	}};
 	
 	public static boolean isValid(String s) {
@@ -34,7 +29,7 @@ public class Solution0020_ValidParentheses {
 			return false;
 		}
 		
-		Stack<Character> stack = new Stack<Character>();
+		Stack<Character> stack = new Stack<>();
 		for (char c : s.toCharArray()) {
 			if (c == ' ') {
 				continue;
@@ -66,8 +61,38 @@ public class Solution0020_ValidParentheses {
 		return stack.isEmpty();
     }
 
+	static boolean isValid2(String s) {
+		// 特殊情况
+		if (s == null || s.isEmpty()) {
+			return true;
+		}
+
+		// 奇数长度肯定无法匹配
+		if ((s.length() & 1) == 1) {
+			return false;
+		}
+
+		// 建立一个栈
+		Deque<Character> stack = new ArrayDeque<>();
+
+		for (char c : s.toCharArray()) {
+			switch (c) {
+				case '(' -> stack.push(')');
+				case '[' -> stack.push(']');
+				case '{' -> stack.push('}');
+				default -> {
+					if (stack.isEmpty() || stack.pop() != c) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return stack.isEmpty();
+	}
+
 	public static void main(String[] args) {
-		String input = null;
+		String input;
 		
 		/*
 		 * 输入: "()"
