@@ -27,11 +27,11 @@ public class Solution0053_MaximumSubarray {
 		int currentMax = nums[0];
 
 
-		for (int i = 0; i < nums.length; i++) {
+		for (int num : nums) {
 			if (preSum < 0) {
-				preSum = nums[i];
+				preSum = num;
 			} else {
-				preSum += nums[i];
+				preSum += num;
 			}
 
 			currentMax = Math.max(currentMax, preSum);
