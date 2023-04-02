@@ -2,10 +2,15 @@ package edgar.leetcode;
 
 /**
  * <a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a>
- * Created by liuzhao on 2022/8/12
+ * Created by Edgar.Liu on 2022/8/12
  */
 public class Solution0121_BestTimeToBuyAndSellStock {
-    public static int maxProfit(int[] prices) {
+    /**
+     * 贪婪算法
+     * @param prices 一只股票每天的价格
+     * @return 最大收益
+     */
+    static int maxProfit(int[] prices) {
         int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0 ;
 
@@ -24,6 +29,44 @@ public class Solution0121_BestTimeToBuyAndSellStock {
         return maxProfit;
     }
 
+    /**
+     * 动态规划算法
+     * @param prices 一只股票每天的价格
+     * @return 最大收益
+     */
+    static int maxProfit2(int[] prices) {
+        // 先处理异常情况
+        if (prices == null || prices.length < 2) {
+            return 0;
+        }
+
+        int[][] dp = new int[prices.length][2];
+
+        // 初始化
+        // 第一天不持有股票的利润
+        dp[0][0] = 0;
+        // 第一天持有股票的利润
+        dp[0][1] = - prices[0];
+
+        for (int i = 1; i < prices.length; i++) {
+            /*
+             * 先计算不持有股票的最大收益
+             * 1. i-1不持有，i也不持有（即什么都不做）
+             * 2. i-i持有，i不持有（即卖了）
+             */
+            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
+
+            /*
+             * 再计算持有股票的最大收益
+             * 1. i-1不持有，i持有（即买入）
+             * 2. i-i持有，i也持有（即什么都不做）
+             */
+            dp[i][1] = Math.max(- prices[i], dp[i-1][1]);
+        }
+
+        return dp[prices.length-1][0];
+    }
+
     public static void main(String[] args) {
         int[] inputs;
 
@@ -35,6 +78,7 @@ public class Solution0121_BestTimeToBuyAndSellStock {
          */
         inputs = new int[]{7,1,5,3,6,4};
         assert 5 == maxProfit(inputs);
+        assert 5 == maxProfit2(inputs);
 
         /*
          * 输入：prices = [7,6,4,3,1]
@@ -43,6 +87,7 @@ public class Solution0121_BestTimeToBuyAndSellStock {
          */
         inputs = new int[]{7,6,4,3,1};
         assert 0 == maxProfit(inputs);
+        assert 0 == maxProfit2(inputs);
 
     }
 }
