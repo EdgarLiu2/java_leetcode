@@ -32,6 +32,11 @@ public class Solution0069_Sqrtx {
     	return result;
     }
 
+	/**
+	 * 通过二分查找算法，寻找X的平方根的整数部分
+	 * @param x 输入X
+	 * @return 平方根的整数部分
+	 */
 	static int mySqrt2(int x) {
 
 		if (x <= 1) {
@@ -55,6 +60,30 @@ public class Solution0069_Sqrtx {
 
 		return (int)result;
 	}
+
+	/**
+	 * 通过牛顿迭代算法，寻找X的平方根的整数部分
+	 * @param x 输入X
+	 * @return 平方根的整数部分
+	 */
+	static int mySqrt3(int x) {
+		if (x == 0 || x == 1) {
+			return x;
+		}
+
+		return (int)newton(x, x);
+	}
+
+	static double newton(double n, int x) {
+		// x/n和n的平均值，更接近x的平方根
+		double result = (x / n + n) / 2;
+
+		if (result == n) {
+			return n;
+		} else {
+			return newton(result, x);
+		}
+	}
     
 	public static void main(String[] args) {
 		/*
@@ -63,6 +92,7 @@ public class Solution0069_Sqrtx {
 		 */
 		assert 46339 == mySqrt(2147395599);
 		assert 46339 == mySqrt2(2147395599);
+		assert 46339 == mySqrt3(2147395599);
 
 		/*
 		 * 输入: 8
@@ -70,6 +100,7 @@ public class Solution0069_Sqrtx {
 		 */
 		assert 2 == mySqrt(8);
 		assert 2 == mySqrt2(8);
+		assert 2 == mySqrt3(8);
 
 		/*
 		 * 输入: 1
@@ -77,6 +108,7 @@ public class Solution0069_Sqrtx {
 		 */
 		assert 1 == mySqrt(1);
 		assert 1 == mySqrt2(1);
+		assert 1 == mySqrt3(1);
 
 		/*
 		 * 输入: 4
@@ -84,6 +116,7 @@ public class Solution0069_Sqrtx {
 		 */
 		assert 2 == mySqrt(4);
 		assert 2 == mySqrt2(4);
+		assert 2 == mySqrt3(4);
 
 	}
 
