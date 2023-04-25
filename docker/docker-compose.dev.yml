@@ -224,6 +224,17 @@ services:
   #     - "D:/workspace/projects/java_leetcode/docker/config/mysql:/etc/mysql"
   #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/data:/var/lib/mysql"
   #     - "D:/workspace/projects/java_leetcode/docker/data/mysql/logs:/var/log/mysql"
+  postgres-db:
+    image: postgres:latest
+    hostname: postgres-db
+    domainname: internal
+    environment:
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql
   # clickhouse-db:
   #   image: yandex/clickhouse-server:latest
   #   hostname: clickhouse-db
@@ -310,4 +321,5 @@ services:
   #     retries: 5
 volumes:
   redis_data:
+  postgres_data:
   # mongo_data:
