@@ -11,6 +11,7 @@ docker events
 docker image prune -a
 docker volume prune
 docker system prune --volumes
+docker image inspect redis:latest
 
 
 REM docker container exec -it dev-leetcode_mysql-db_1 bash

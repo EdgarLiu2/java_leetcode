@@ -151,6 +151,103 @@ services:
   #     timeout: 60s
   #     retries: 120
 ###############################################################################
+# Prometheus & Grafana
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    domainname: internal
+    # http://localhost:9090
+    ports:
+      - 9090:9090
+    expose:
+      - 9090
+    restart: unless-stopped
+    volumes:
+      - ./config/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - prometheus-monitor-net
+    labels:
+      org.label-schema.group: "prometheus-monitoring"
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    # http://localhost:9100/metrics
+    ports:
+      - "9100:9100"
+    expose:
+      - 9100
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - prometheus-monitor-net
+    labels:
+      org.label-schema.group: "prometheus-monitoring"
+  # pushgateway:
+  #   image: prom/pushgateway:latest
+  #   container_name: pushgateway
+  #   ports:
+  #     - "9091:9091"
+  #   expose:
+  #     - 9091
+  #   restart: unless-stopped
+  #   networks:
+  #     - prometheus-monitor-net
+  #   labels:
+  #     org.label-schema.group: "prometheus-monitoring"
+  # alertmanager:
+  #   image: prom/alertmanager:latest
+  #   container_name: alertmanager
+  #   ports:
+  #     - "9093:9093"
+  #   expose:
+  #     - 9093
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./config/prometheus/:/etc/alertmanager/
+  #   command:
+  #     - '--config.file=/etc/alertmanager/alertmanager.yml'
+  #     - '--storage.path=/alertmanager'
+  #   networks:
+  #     - prometheus-monitor-net
+  #   labels:
+  #     org.label-schema.group: "prometheus-monitoring"
+  grafana:
+    image: grafana/grafana:latest
+    hostname: grafana
+    domainname: internal
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SERVER_DOMAIN=localhost
+    pull_policy: always
+    # http://localhost:3000
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - prometheus-monitor-net
+    labels:
+      org.label-schema.group: "prometheus-monitoring"
+###############################################################################
 # MessageQueue
   # rabbitmq:
     # image: rabbitmq:3-management
@@ -322,7 +419,13 @@ services:
   #     timeout: 10s
   #     retries: 5
 volumes:
-  redis_data:
-  mysql_data:
-  postgres_data:
-  # mongo_data:
+  redis_data: {}
+  mysql_data: {}
+  postgres_data: {}
+  mongo_data: {}
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  prometheus-monitor-net:
+    driver: bridge
