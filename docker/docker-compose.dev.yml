@@ -172,8 +172,8 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention=200h'
       - '--web.enable-lifecycle'
-    networks:
-      - prometheus-monitor-net
+    # networks:
+    #   - prometheus-monitor-net
     labels:
       org.label-schema.group: "prometheus-monitoring"
   node-exporter:
@@ -194,8 +194,8 @@ services:
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    networks:
-      - prometheus-monitor-net
+    # networks:
+    #   - prometheus-monitor-net
     labels:
       org.label-schema.group: "prometheus-monitoring"
   # pushgateway:
@@ -242,8 +242,8 @@ services:
     restart: unless-stopped
     volumes:
       - grafana_data:/var/lib/grafana
-    networks:
-      - prometheus-monitor-net
+    # networks:
+    #   - prometheus-monitor-net
     labels:
       org.label-schema.group: "prometheus-monitoring"
 ###############################################################################
@@ -425,6 +425,6 @@ volumes:
   prometheus_data: {}
   grafana_data: {}
 
-networks:
-  prometheus-monitor-net:
-    driver: bridge
+# networks:
+  # prometheus-monitor-net:
+  #   driver: bridge
