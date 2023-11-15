@@ -2,7 +2,12 @@ package edgar.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * @author Edgar.Liu
+ * @since 2023/11/15 - 10:09
+ */
 public class TreeNode {
 	public int val;
 	public TreeNode left;
@@ -20,7 +25,24 @@ public class TreeNode {
 		this.left = left;
 		this.right = right;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TreeNode treeNode = (TreeNode) o;
+		return val == treeNode.val && Objects.equals(left, treeNode.left) && Objects.equals(right, treeNode.right);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(val, left, right);
+	}
+
 	public static TreeNode buildTree(int[] values) {
 		return new TreeNode();
 	}
