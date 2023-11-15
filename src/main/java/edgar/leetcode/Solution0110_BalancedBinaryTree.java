@@ -2,7 +2,8 @@ package edgar.leetcode;
 
 /**
  * <a href="https://leetcode.cn/problems/balanced-binary-tree/">110. 平衡二叉树</a>
- * Created by Edgar.Liu on 2022/8/5
+ * @author Edgar.Liu
+ * @since 2022/8/5 - 09:18
  */
 public class Solution0110_BalancedBinaryTree {
     static boolean isBalanced(TreeNode root) {
@@ -60,6 +61,34 @@ public class Solution0110_BalancedBinaryTree {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    static boolean isBalanced3(TreeNode root) {
+        return isBalancedBinaryTree(root).isBalanced;
+    }
+
+    private static BinaryTreeInfo isBalancedBinaryTree(TreeNode root) {
+        // 空树是平衡的，且高度为0
+        if (root == null) {
+            return new BinaryTreeInfo(true, 0);
+        }
+
+        // 分别从左右两个子树获取信息
+        BinaryTreeInfo leftInfo = isBalancedBinaryTree(root.left);
+        BinaryTreeInfo rightInfo = isBalancedBinaryTree(root.right);
+
+        // 包含root，节点是否为平衡二叉树的条件
+        boolean isBalanced = false;
+        int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+
+        if (leftInfo.isBalanced // 左子树是平衡的
+                && rightInfo.isBalanced // 右子树是平衡的
+                && Math.abs(leftInfo.height - rightInfo.height) < 2 // 左右子树高度小于2
+        ) {
+            isBalanced = true;
+        }
+
+        return new BinaryTreeInfo(isBalanced, height);
+    }
+
     public static void main(String[] args) {
 
         TreeNode root;
@@ -75,6 +104,7 @@ public class Solution0110_BalancedBinaryTree {
                         new TreeNode(7)));
         assert isBalanced(root);
         assert isBalanced2(root);
+        assert isBalanced3(root);
 
 
         /*
@@ -90,6 +120,7 @@ public class Solution0110_BalancedBinaryTree {
                 new TreeNode(2));
         assert !isBalanced(root);
         assert !isBalanced2(root);
+        assert !isBalanced3(root);
 
         /*
          * 输入：输入：root = []
@@ -98,5 +129,16 @@ public class Solution0110_BalancedBinaryTree {
         root = null;
         assert isBalanced(root);
         assert isBalanced2(root);
+        assert isBalanced3(root);
+    }
+}
+
+class BinaryTreeInfo {
+    public boolean isBalanced;
+    public int height;
+
+    public BinaryTreeInfo(boolean isBalanced, int height) {
+        this.isBalanced = isBalanced;
+        this.height = height;
     }
 }
