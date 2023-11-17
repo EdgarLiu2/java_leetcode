@@ -3,7 +3,8 @@ package edgar.leetcode;
 import java.util.*;
 
 /**
- * Created by Edgar.Liu on 2022/10/29
+ * @author Edgar.Liu
+ * @since 2022/10/29 - 23:29
  */
 public class Node2 {
 
@@ -41,6 +42,23 @@ public class Node2 {
         }
 
         return String.join(" -> ", list);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Node2 node2 = (Node2) o;
+        return val == node2.val && Objects.equals(next, node2.next) && Objects.equals(random, node2.random);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(val, next, random);
     }
 
     public static Node2 buildFromArray(int[][] inputs) {

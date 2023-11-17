@@ -6,11 +6,13 @@ import java.util.Objects;
 
 /**
  * <a href="https://leetcode.cn/problems/copy-list-with-random-pointer/">138. 复制带随机指针的链表</a>
- * Created by Edgar.Liu on 2022/10/29
+ *
+ * @author Edgar.Liu
+ * @since 2022/10/29 - 23:29
  */
 public class Solution0138_CopyListWithRandomPointer {
 
-    public static Node2 copyRandomList(Node2 head) {
+    static Node2 copyRandomList(Node2 head) {
 
         if (Objects.isNull(head)) {
             return null;
@@ -45,6 +47,32 @@ public class Solution0138_CopyListWithRandomPointer {
         }
 
         return newHead.next;
+    }
+
+    static Node2 copyRandomList2(Node2 head) {
+        // 保存新旧节点的对应关系
+        Map<Node2, Node2> map = new HashMap<>();
+
+        Node2 current = head;
+        while (current != null) {
+            Node2 newNode = new Node2(current.val);
+            // 保存节点关系
+            map.put(current, newNode);
+
+            // 旧列表向后移动
+            current = current.next;
+        }
+
+        // 第二遍遍历head，调整newHead节点的next和random属性
+        current = head;
+        while (current != null) {
+            map.get(current).next = map.get(current.next);
+            map.get(current).random = map.get(current.random);
+
+            current = current.next;
+        }
+
+        return map.get(head);
     }
 
     public static void main(String[] args) {
