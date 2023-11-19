@@ -75,6 +75,59 @@ public class Solution0138_CopyListWithRandomPointer {
         return map.get(head);
     }
 
+    static Node2 copyRandomList3(Node2 head) {
+        Node2 pCurrent;
+
+        // 从head开始，沿着next指针遍历原始数组，为每个节点创建一个clone节点，并放在原来节点的后面
+        // 1 -> 2
+        // 1 -> 1' -> 2
+        pCurrent = head;
+        while (pCurrent != null) {
+            Node2 pNext = pCurrent.next;
+
+            // 创建1'节点，并加入当前链表中
+            Node2 pCloneCurrent = new Node2(pCurrent.val);
+            pCloneCurrent.next = pNext;
+            pCurrent.next = pCloneCurrent;
+
+            // 移动到节点2
+            pCurrent = pNext;
+        }
+
+        // 从head开始，沿着next指针遍历原始数组，参照原节点的random指针，设置新节点的random指针
+        pCurrent = head;
+        while (pCurrent != null) {
+            Node2 pNext = pCurrent.next.next;
+
+            // 如果1节点的random指向3节点，那么1'节点的random指向3节点的next，即3'节点
+            Node2 pCloneCurrent = pCurrent.next;
+            pCloneCurrent.random = (pCurrent.random == null) ? null : pCurrent.random.next;
+
+            // 移动到节点2
+            pCurrent = pNext;
+        }
+
+        Node2 newHead = new Node2(0);
+        Node2 newCurrent = newHead;
+        // 对链表进行拆分，将1'和2'等新节点挪到newHead下并返回
+        // 1 -> 1' -> 2 -> 2'
+        pCurrent = head;
+        while (pCurrent != null) {
+            Node2 pNext = pCurrent.next.next;
+
+            // head -> 1'
+            newCurrent.next = pCurrent.next;
+            newCurrent = newCurrent.next;
+            // 1 -> 2
+            pCurrent.next = pNext;
+
+            // 移动到节点2
+            pCurrent = pNext;
+        }
+
+        return newHead.next;
+    }
+
     public static void main(String[] args) {
 
         int[][] inputs;
@@ -89,6 +142,10 @@ public class Solution0138_CopyListWithRandomPointer {
         head = Node2.buildFromArray(inputs);
         copiedHead = copyRandomList(head);
         System.out.println(copiedHead);
+        copiedHead = copyRandomList2(head);
+        System.out.println(copiedHead);
+        copiedHead = copyRandomList3(head);
+        System.out.println(copiedHead);
 
         /*
          * 输入：head = [[1,1],[2,1]]
@@ -98,6 +155,10 @@ public class Solution0138_CopyListWithRandomPointer {
         head = Node2.buildFromArray(inputs);
         copiedHead = copyRandomList(head);
         System.out.println(copiedHead);
+        copiedHead = copyRandomList2(head);
+        System.out.println(copiedHead);
+        copiedHead = copyRandomList3(head);
+        System.out.println(copiedHead);
 
         /*
          * 输入：head = [[3,null],[3,0],[3,null]]
@@ -106,6 +167,10 @@ public class Solution0138_CopyListWithRandomPointer {
         inputs = new int[][]{{3,-1},{3,0},{3,-1}};
         head = Node2.buildFromArray(inputs);
         copiedHead = copyRandomList(head);
+        System.out.println(copiedHead);
+        copiedHead = copyRandomList2(head);
+        System.out.println(copiedHead);
+        copiedHead = copyRandomList3(head);
         System.out.println(copiedHead);
     }
 }

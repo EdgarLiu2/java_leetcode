@@ -5,9 +5,11 @@ import java.util.Map;
 
 /**
  * <a href="https://leetcode.cn/problems/fei-bo-na-qi-shu-lie-lcof/">剑指 Offer 10- I. 斐波那契数列</a>
- * Created by Edgar.Liu on 2023/1/30
+ *
+ * @author Edgar.Liu
+ * @since 2023/1/30 - 23:29
  */
-public class Offer0010i_FeiBoNaQiShuLieLcof {
+public class Offer0010_FeiBoNaQiShuLieLcof {
 
     private final Map<Integer, Integer> localCache = new HashMap<>();
 

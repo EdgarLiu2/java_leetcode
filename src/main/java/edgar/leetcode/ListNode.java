@@ -1,5 +1,10 @@
 package edgar.leetcode;
 
+import java.util.Objects;
+
+/**
+ * @author Edgar.Liu
+ */
 public class ListNode {
 	public int val;
 	public ListNode next;
@@ -16,16 +21,33 @@ public class ListNode {
 		this.val = val;
 		this.next = next;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ListNode listNode = (ListNode) o;
+		return val == listNode.val && Objects.equals(next, listNode.next);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(val, next);
+	}
+
 	public static ListNode buildList(int[] values) {
 		ListNode head = new ListNode(0);
 		ListNode pNode = head;
-		
-		for (int i = 0; i < values.length; i++) {
-			ListNode node = new ListNode(values[i]);
-			pNode.next = node;
-			pNode = node;
-		}
+
+        for (int value : values) {
+            ListNode node = new ListNode(value);
+            pNode.next = node;
+            pNode = node;
+        }
 		
 		return head.next;
 	}
@@ -66,11 +88,12 @@ public class ListNode {
 		if(head == null) {
 			return;
 		} else {
-			buffer.append(String.valueOf(head.val));
+			buffer.append(head.val);
 		}
 		
 		while(head.next != null) {
-			buffer.append(" -> " + head.next.val);
+			buffer.append(" -> ");
+			buffer.append(head.next.val);
 			head = head.next;
 		}
 		

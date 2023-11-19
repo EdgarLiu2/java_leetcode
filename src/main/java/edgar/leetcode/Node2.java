@@ -58,7 +58,7 @@ public class Node2 {
 
     @Override
     public int hashCode() {
-        return Objects.hash(val, next, random);
+        return Objects.hash(val);
     }
 
     public static Node2 buildFromArray(int[][] inputs) {

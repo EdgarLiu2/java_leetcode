@@ -5,11 +5,13 @@ import java.util.Set;
 
 /**
  * <a href="https://leetcode.cn/problems/intersection-of-two-linked-lists/">160. 相交链表</a>
- * Created by Edgar.Liu on 2023/2/6
+ *
+ * @author Edgar.Liu
+ * @since 2023/2/6 - 23:29
  */
 public class Solution0160_IntersectionOfTwoLinkedLists {
 
-    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+    static ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
         // 处理特殊情况
         if (headA == null || headB == null) {
             return null;
@@ -37,7 +39,7 @@ public class Solution0160_IntersectionOfTwoLinkedLists {
         return null;
     }
 
-    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+    static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
         // 处理特殊情况
         if (headA == null || headB == null) {
             return null;
@@ -57,7 +59,7 @@ public class Solution0160_IntersectionOfTwoLinkedLists {
         return pA;
     }
 
-    public ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
+    static ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
         // 处理特殊情况
         if (headA == null || headB == null) {
             return null;
