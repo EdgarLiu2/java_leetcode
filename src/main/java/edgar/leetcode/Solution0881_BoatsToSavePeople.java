@@ -31,7 +31,6 @@ public class Solution0881_BoatsToSavePeople {
         // 最后结果由三部分组成
         int leftRightMatchNum = 0;
         int leftNotMatchNum = 0;
-        int rightNotMatchNum = 0;
 
         while (leftIdx >= 0 && rightIdx < people.length) {
             if (people[leftIdx] + people[rightIdx] > limit) {
