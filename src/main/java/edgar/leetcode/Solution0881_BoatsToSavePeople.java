@@ -16,7 +16,7 @@ public class Solution0881_BoatsToSavePeople {
         // 确定阈值为limit的一半
         double threshold = limit / 2.0;
 
-        // 遍历people，找到最后一个<=threshold的位置
+        // 遍历people，找到<=threshold的最右 位置，作为左指针的起始位置
         int leftIdx = -1;
         for (int i = 0; i < people.length; i++) {
             if (people[i] <= threshold) {
@@ -26,19 +26,22 @@ public class Solution0881_BoatsToSavePeople {
                 break;
             }
         }
+        // 左指针+1，作为右指针的起始位置
         int rightIdx = leftIdx + 1;
 
-        // 最后结果由三部分组成
+        // 左右可以拼船计数
         int leftRightMatchNum = 0;
+        // 左侧无法与右侧拼船计数
         int leftNotMatchNum = 0;
 
         while (leftIdx >= 0 && rightIdx < people.length) {
             if (people[leftIdx] + people[rightIdx] > limit) {
                 // leftIdx和rightIdx的和超过limit时，无法拼船，leftIdx向左移动
-                leftNotMatchNum++;
                 leftIdx--;
+                // 左侧无法与右侧拼船计数+1
+                leftNotMatchNum++;
             } else {
-                // leftIdx和rightIdx的和未超过limit，可以凑一船
+                // leftIdx和rightIdx的和未超过limit，可以凑一船，左右可以拼船计数+1
                 leftRightMatchNum++;
                 leftIdx--;
                 rightIdx++;
@@ -46,15 +49,16 @@ public class Solution0881_BoatsToSavePeople {
         }
 
         int ans = leftRightMatchNum;
-        leftIdx++;
 
-        if (leftIdx + leftNotMatchNum > 0) {
-            // 左侧人未安排完，两个人拼一艘
-            ans += Math.ceil((leftIdx + leftNotMatchNum) / 2.0);
+        // 左侧无法与右侧拼船，加上左侧未使用的
+        leftNotMatchNum += leftIdx + 1;
+        if (leftNotMatchNum > 0) {
+            // 左侧人未安排，两个人拼一艘
+            ans += (leftNotMatchNum + 1) / 2;
         }
 
+        // 右侧人未安排，一个人一船
         if (rightIdx != people.length) {
-            // 右侧人未安排完，一个人一艘船
             ans += people.length - rightIdx;
         }
 

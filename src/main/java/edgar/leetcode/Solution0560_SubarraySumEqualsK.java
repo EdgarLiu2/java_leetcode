@@ -36,19 +36,22 @@ public class Solution0560_SubarraySumEqualsK {
         int ans = 0;
         // 初始化变量，前缀和
         int preSum = 0;
+        // 前缀和字典，记录目前为止，某个前缀和出现的次数
         Map<Integer, Integer> prefixSumMap = new HashMap<>();
+        // 为了开头的答案
         prefixSumMap.put(0, 1);
 
-        // 考虑每个元素作为子数组的结尾
+        // 考虑每个元素i作为子数组的结尾，统计以i结尾的累加和为sum的子数组n个
         for (int num : nums) {
-            // 计算含i元素，当前pre数组所有元素的和
+            // 计算含i元素num，累加和
             preSum += num;
 
+            // 找到满足条件的前缀和，计入答案
             if (prefixSumMap.containsKey(preSum - k)) {
                 ans += prefixSumMap.get(preSum - k);
             }
 
-            // 将当前前缀计入前缀数组
+            // 将当前前缀和放入前缀和字典，如果之前已经存在，计数+1
             prefixSumMap.put(preSum, prefixSumMap.getOrDefault(preSum, 0) + 1);
         }
 
