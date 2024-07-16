@@ -1,11 +1,13 @@
 REM COMPOSE_PROJECT_NAME=dev-leetcode
 docker-compose -p dev-leetcode -f docker-compose.dev.yml down --remove-orphans
-docker-compose -p dev-leetcode -f docker-compose.dev.yml up -d
+docker compose -p dev-leetcode -f docker-compose.dev.yml up -d
 docker-compose -p dev-leetcode -f docker-compose.dev.yml down sonarqube
 docker-compose -p dev-leetcode -f docker-compose.dev.yml up sonarqube -d
 docker-compose -p dev-leetcode -f docker-compose.dev.yml restart grafana
 docker-compose -p dev-leetcode -f docker-compose.dev.yml down grafana
 docker-compose -p dev-leetcode -f docker-compose.dev.yml up grafana -d
+docker-compose -p dev-leetcode -f docker-compose.dev.yml up mongo-db -d
+docker-compose -p dev-leetcode -f docker-compose.dev.yml down mongo-db
 
 docker-compose -p dev-kafka -f kafka.cluster.yml down --remove-orphans
 docker-compose -p dev-kafka -f kafka.cluster.yml up -d
