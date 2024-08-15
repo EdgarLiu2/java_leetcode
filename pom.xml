@@ -8,7 +8,7 @@
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0</version>
+		<version>3.3.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -28,12 +28,30 @@
 		<canal.version>1.1.7</canal.version>
 		<!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache -->
 		<mybatis-ehcache.version>1.2.3</mybatis-ehcache.version>
-		<mybatis.plus.version>3.5.2</mybatis.plus.version>
-		<netty.version>4.1.84.Final</netty.version>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+		<mybatis.plus.version>3.5.7</mybatis.plus.version>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter -->
+		<dynamic-datasource.version>4.3.1</dynamic-datasource.version>
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+		<netty.version>4.1.112.Final</netty.version>
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
-		<tomcat.version>10.1.24</tomcat.version>
+		<tomcat.version>10.1.28</tomcat.version>
 		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-		<jedis.version>5.1.3</jedis.version>
+		<jedis.version>5.1.4</jedis.version>
+		<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+		<rabbitmq.version>5.21.0</rabbitmq.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+		<kafka.version>3.8.0</kafka.version>
+		<!-- https://mvnrepository.com/artifact/io.etcd/jetcd-core -->
+		<etcd.version>0.8.2</etcd.version>
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<guava.version>33.2.1-jre</guava.version>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<lombok.version>1.18.34</lombok.version>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<fastjson.version>2.0.52</fastjson.version>
+		<!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
+		<datafaker.version>2.3.1</datafaker.version>
 	</properties>
 
 	<dependencies>
@@ -61,25 +79,25 @@
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
-			<version>5.21.0</version>
+			<version>${rabbitmq.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
 		<dependency>
 		    <groupId>org.apache.kafka</groupId>
 		    <artifactId>kafka-clients</artifactId>
-		    <version>3.7.0</version>
+		    <version>${kafka.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.etcd/jetcd-core -->
 		<dependency>
 			<groupId>io.etcd</groupId>
 			<artifactId>jetcd-core</artifactId>
-			<version>0.8.2</version>
+			<version>${etcd.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
 		    <groupId>com.google.guava</groupId>
 		    <artifactId>guava</artifactId>
-		    <version>33.2.1-jre</version>
+		    <version>${guava.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -127,7 +145,13 @@
 		<dependency>
 		    <groupId>com.baomidou</groupId>
 		    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-		    <version>${mybatis.plus.version}</version>
+		    <version>${dynamic-datasource.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>24.1.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
@@ -147,7 +171,7 @@
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
-		    <version>1.18.32</version>
+		    <version>${lombok.version}</version>
 		    <scope>provided</scope>
 		    <optional>true</optional>
 		</dependency>
@@ -161,7 +185,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>2.0.51</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 
 
@@ -176,7 +200,7 @@
 		<dependency>
 		    <groupId>net.datafaker</groupId>
 		    <artifactId>datafaker</artifactId>
-		    <version>2.2.2</version>
+		    <version>${datafaker.version}</version>
 		</dependency>
 		<dependency>
             <groupId>org.springframework.boot</groupId>
@@ -218,7 +242,7 @@
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.3.2</version>
+					<version>3.4.0</version>
 				</plugin>
 				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
@@ -238,12 +262,12 @@
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>3.3.1</version>
 				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.4.1</version>
+					<version>3.4.2</version>
 				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
 				<plugin>
@@ -264,7 +288,7 @@
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-project-info-reports-plugin -->
 				<plugin>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>3.5.0</version>
+					<version>3.6.2</version>
 				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
 				<!-- mvn sonar:sonar -->

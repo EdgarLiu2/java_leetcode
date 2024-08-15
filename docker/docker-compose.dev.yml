@@ -264,23 +264,24 @@ services:
   #     org.label-schema.group: "prometheus-monitoring"
 ###############################################################################
 # MessageQueue
-  # rabbitmq:
-    # image: rabbitmq:3-management
-    # hostname: rabbitmq-server
-    # domainname: internal
-    # environment:
-      # - ENV=DEV
-      # - RABBITMQ_DEFAULT_USER=admin
-      # - RABBITMQ_DEFAULT_PASS=admin
-    # ports:
-      # - 5672:5672
-      # - 15672:15672
-    # restart: unless-stopped
-    # healthcheck:
-      # test: ["CMD", "curl", "-f", "http://localhost:5672"]
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq-server
+    domainname: internal
+    environment:
+      - ENV=DEV
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_VHOST=/
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   # kafka-1:
     # image: wurstmeister/kafka:latest
     # hostname: kafka-1
