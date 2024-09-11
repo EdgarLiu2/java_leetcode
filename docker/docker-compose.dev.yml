@@ -12,12 +12,27 @@ services:
     # domainname: internal
     # restart: always
     # tty: true
-  # sonarqube:
-    # image: sonarqube
-    # hostname: sonarqube-1
-    # domainname: internal
-    # ports:
-      # - 9000:9000
+  sonarqube:
+    image: sonarqube
+    hostname: sonarqube-1
+    domainname: internal
+    ports:
+      - 9000:9000
+    # depends_on:
+    #   - postgres-db
+    # environment:
+    #   SONAR_JDBC_URL: jdbc:postgresql://postgres-db:5432/sonar
+    #   SONAR JDBC USERNAME: pq
+    #   SONAR_JDBC PASSWORD: 123456
+  # jenkins:
+  #   image: jenkinsci/blueocean
+  #   hostname: jenkins-1
+  #   domainname: internal
+  #   ports:
+  #     - 8080:8080
+  #     - 50000:50000
+  #   volumes:
+  #     - jenkins-data:/var/jenkins_home
 ###############################################################################
 # Configuration Center
   etcd-0:
@@ -135,7 +150,7 @@ services:
       # - canal.instance.connectionCharset=UTF-8
       # - canal.instance.tsdb.enable=true
       # - canal.instance.gtidon=false
-      # - canal.instance.filter.regex=.*\\..* 
+      # - canal.instance.filter.regex=.*\\..*
     # ports:
       # - 11111:11111
     # restart: unless-stopped
@@ -344,6 +359,7 @@ services:
   #   hostname: postgres-db
   #   domainname: internal
   #   environment:
+  #     POSTGRES_USER: pq
   #     POSTGRES_PASSWORD: 123456
   #   ports:
   #     - 5432:5432
@@ -441,6 +457,7 @@ volumes:
   mongo_data: {}
   prometheus_data: {}
   grafana_data: {}
+  jenkins-data: {}
 
 # networks:
   # prometheus-monitor-net:
